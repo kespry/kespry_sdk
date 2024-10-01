@@ -1,4 +1,4 @@
-<img src="https://github.com/kespry/kespry_sdk/tree/main/images/kespry-firmatek-logo.svg" alt="Kespry" height="200" />
+<img src="https://github.com/kespry/kespry_sdk/blob/main/images/kespry-firmatek-logo.svg" alt="Kespry" height="200" />
 
 # Kespry SDK
 This project contains the pre-built client SDKs for Kespry APIs and a sample application. Currently only JavaScript client SDKs and sample are provided.
