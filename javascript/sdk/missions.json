@@ -1,0 +1,544 @@
+{
+    "swagger": "2.0",
+    "basePath": "/api/missions",
+    "paths": {
+        "/v1/sites": {
+            "get": {
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Site"
+                            }
+                        }
+                    }
+                },
+                "operationId": "get_sites",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "v1"
+                ]
+            }
+        },
+        "/v1/sites/{site_id}/missions": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "description": "ID of the site",
+                    "name": "site_id",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "404": {
+                        "description": "Site not found"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Mission"
+                            }
+                        }
+                    }
+                },
+                "operationId": "get_missions",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "v1"
+                ]
+            }
+        },
+        "/v1/sites/{site_id}/missions/latest": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "description": "ID of the site",
+                    "name": "site_id",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "404": {
+                        "description": "Site not found"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Mission"
+                        }
+                    }
+                },
+                "operationId": "get_missions_latest_for_site",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "v1"
+                ]
+            }
+        },
+        "/v1/sites/{site_id}/missions/{mission_id}/markers": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "description": "ID of the mission",
+                    "name": "mission_id",
+                    "required": true,
+                    "type": "integer"
+                },
+                {
+                    "in": "path",
+                    "description": "ID of the site",
+                    "name": "site_id",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "404": {
+                        "description": "Mission not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Marker"
+                            }
+                        }
+                    }
+                },
+                "operationId": "get_markers",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "v1"
+                ]
+            }
+        },
+        "/v1/sites/{site_id}/missions/{mission_id}/volumes": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "description": "ID of the mission",
+                    "name": "mission_id",
+                    "required": true,
+                    "type": "integer"
+                },
+                {
+                    "in": "path",
+                    "description": "ID of the site",
+                    "name": "site_id",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "404": {
+                        "description": "Mission not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MarkerVolume"
+                            }
+                        }
+                    }
+                },
+                "operationId": "get_marker_volumes",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "v1"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "Firmatek Missions API",
+        "version": "1.0",
+        "description": "Missions API for accessing Missions in the Kespry Platform",
+        "termsOfService": "/terms"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "apikey": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
+        }
+    },
+    "security": [
+        {
+            "apikey": [
+                {
+                    "type": "apiKey",
+                    "in": "header",
+                    "name": "Authorization"
+                }
+            ]
+        }
+    ],
+    "tags": [
+        {
+            "name": "v1",
+            "description": "APIs for accessing Kespry Missions"
+        }
+    ],
+    "definitions": {
+        "Site": {
+            "required": [
+                "customer_id",
+                "id",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "Site ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Site name"
+                },
+                "customer_id": {
+                    "type": "integer",
+                    "description": "Customer ID"
+                },
+                "center_lat": {
+                    "type": "number",
+                    "description": "Center latitude in WGS84"
+                },
+                "center_lng": {
+                    "type": "number",
+                    "description": "Center longitude in WGS84"
+                },
+                "outline": {
+                    "type": "object",
+                    "description": "Site outline as a GeoJson format in WGS84"
+                },
+                "created_at": {
+                    "type": "string",
+                    "description": "Date the site was created"
+                },
+                "update_at": {
+                    "type": "string",
+                    "description": "Date the site was update"
+                }
+            },
+            "type": "object"
+        },
+        "Mission": {
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "Mission ID"
+                },
+                "uid": {
+                    "type": "string",
+                    "description": "Fly ID"
+                },
+                "captured_at": {
+                    "type": "string",
+                    "description": "Date the mission was captured"
+                },
+                "created_at": {
+                    "type": "string",
+                    "description": "Date the mission was created"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "description": "Date the mission was updated"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Mission status"
+                },
+                "locked": {
+                    "type": "string",
+                    "description": "Is this mission locked"
+                },
+                "hidden": {
+                    "type": "string",
+                    "description": "Hidden TODO: Remove this from here..."
+                },
+                "outline": {
+                    "type": "object",
+                    "description": "Mission outline as a GeoJson format in WGS84"
+                },
+                "mission_outline": {
+                    "type": "object",
+                    "description": "Mission outline as a GeoJson format in WGS84"
+                },
+                "operator": {
+                    "type": "string",
+                    "description": "Name of the flight operator"
+                }
+            },
+            "type": "object"
+        },
+        "Marker": {
+            "required": [
+                "id",
+                "image_id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "Marker ID"
+                },
+                "image_id": {
+                    "type": "integer",
+                    "description": "Mission ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Marker name"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Marker description"
+                },
+                "marker_type": {
+                    "type": "integer",
+                    "description": "Marker type"
+                },
+                "shape_type": {
+                    "type": "string",
+                    "description": "Marker type"
+                },
+                "pile_id": {
+                    "type": "integer",
+                    "description": "Pile ID"
+                },
+                "known_surface_id": {
+                    "type": "integer",
+                    "description": "Pile ID"
+                },
+                "density": {
+                    "type": "number",
+                    "description": "Pile ID"
+                },
+                "tonnage": {
+                    "type": "number",
+                    "description": "Pile ID"
+                },
+                "offset": {
+                    "type": "number",
+                    "description": "Pile ID"
+                },
+                "fixed_elevation": {
+                    "type": "number",
+                    "description": "Pile ID"
+                },
+                "geojson": {
+                    "type": "object",
+                    "description": "Geometry of the marker as a GeoJson format in WGS84"
+                },
+                "created_at": {
+                    "type": "string",
+                    "description": "Date the marker was created"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "description": "Date the marker was update"
+                },
+                "created_by": {
+                    "type": "string",
+                    "description": "User who created the marker"
+                },
+                "updated_by": {
+                    "type": "string",
+                    "description": "User who last updated the marker"
+                },
+                "locked": {
+                    "type": "boolean",
+                    "description": "Is the marker locked"
+                },
+                "is_manual": {
+                    "type": "boolean",
+                    "description": "Is the marker manual or assigned to an inventory product"
+                },
+                "use_extracted": {
+                    "type": "boolean",
+                    "description": "Is the marker locked"
+                },
+                "clip_map": {
+                    "type": "boolean",
+                    "description": "Is the marker locked"
+                },
+                "persist": {
+                    "type": "boolean",
+                    "description": "Is the marker locked"
+                },
+                "dashboard_data": {
+                    "type": "boolean",
+                    "description": "Is the marker locked"
+                },
+                "product_id": {
+                    "type": "integer",
+                    "description": "ID of the product"
+                },
+                "volume_mode": {
+                    "type": "string",
+                    "description": "Volume mode for the marker if it is a volume based marker"
+                },
+                "volume": {
+                    "type": "object",
+                    "description": "Volume mode for the marker if it is a volume based marker"
+                },
+                "defeatured_volume": {
+                    "type": "object",
+                    "description": "Volume mode for the marker if it is a volume based marker"
+                },
+                "base_points": {
+                    "type": "object",
+                    "description": "Volume mode for the marker if it is a volume based marker"
+                }
+            },
+            "type": "object"
+        },
+        "MarkerVolume": {
+            "required": [
+                "name",
+                "num"
+            ],
+            "properties": {
+                "num": {
+                    "type": "string",
+                    "description": "Pile #"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description"
+                },
+                "surface_desc": {
+                    "type": "string",
+                    "description": "Surface Description"
+                },
+                "sku": {
+                    "type": "string",
+                    "description": "SKU Number"
+                },
+                "surfaceArea": {
+                    "type": "number",
+                    "description": "Area (m2)"
+                },
+                "perimeter": {
+                    "type": "number",
+                    "description": "Perimeter (m)"
+                },
+                "cutVolume": {
+                    "type": "number",
+                    "description": "Cut Volume"
+                },
+                "fillVolume": {
+                    "type": "number",
+                    "description": "Fill Volume"
+                },
+                "threshold": {
+                    "type": "number",
+                    "description": "Minimum Threshold"
+                },
+                "offset": {
+                    "type": "number",
+                    "description": "Offset"
+                },
+                "computedDensity": {
+                    "type": "number",
+                    "description": "Density"
+                },
+                "cutMass": {
+                    "type": "number",
+                    "description": "Cut Mass"
+                },
+                "fillMass": {
+                    "type": "number",
+                    "description": "Fill Mass"
+                },
+                "usesExtracted": {
+                    "type": "boolean",
+                    "description": "Uses Extracted"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "responses": {
+        "ParseError": {
+            "description": "When a mask can't be parsed"
+        },
+        "MaskError": {
+            "description": "When any error occurs on mask"
+        }
+    }
+}
