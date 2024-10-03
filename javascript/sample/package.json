@@ -9,6 +9,7 @@
   "author": "software@firmatek.com",
   "license": "ISC",
   "dependencies": {
+    "superagent": "3.7.0",
     "application_authorization_api": "file:../sdk/auth",
     "firmatek_missions_api": "file:../sdk/missions"
   }
