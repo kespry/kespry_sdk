@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 <a name="postLogin"></a>
 # **postLogin**
-> Auth postLogin(grantType, opts)
+> Auth postLogin(grantType)
 
 
 
@@ -27,9 +27,6 @@ var apiInstance = new ApplicationAuthorizationApi.V1Api();
 
 var grantType = "client_credentials"; // String | Grant type
 
-var opts = { 
-  'xFields': "xFields_example" // String | An optional fields mask
-};
 
 var callback = function(error, data, response) {
   if (error) {
@@ -38,7 +35,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.postLogin(grantType, opts, callback);
+apiInstance.postLogin(grantType, callback);
 ```
 
 ### Parameters
@@ -46,7 +43,6 @@ apiInstance.postLogin(grantType, opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **grantType** | **String**| Grant type | [default to client_credentials]
- **xFields** | **String**| An optional fields mask | [optional] 
 
 ### Return type
 

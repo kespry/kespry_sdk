@@ -109,9 +109,6 @@ var missionId = 56; // {Number} ID of the mission
 
 var siteId = 56; // {Number} ID of the site
 
-var opts = { 
-  'xFields': "xFields_example" // {String} An optional fields mask
-};
 
 var callback = function(error, data, response) {
   if (error) {
@@ -120,7 +117,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.getMarkerVolumes(missionId, siteId, opts, callback);
+api.getMarkerVolumes(missionId, siteId, callback);
 
 ```
 

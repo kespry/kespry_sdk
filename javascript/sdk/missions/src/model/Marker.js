@@ -76,8 +76,6 @@
         obj.knownSurfaceId = ApiClient.convertToType(data['known_surface_id'], 'Number');
       if (data.hasOwnProperty('density'))
         obj.density = ApiClient.convertToType(data['density'], 'Number');
-      if (data.hasOwnProperty('tonnage'))
-        obj.tonnage = ApiClient.convertToType(data['tonnage'], 'Number');
       if (data.hasOwnProperty('offset'))
         obj.offset = ApiClient.convertToType(data['offset'], 'Number');
       if (data.hasOwnProperty('fixed_elevation'))
@@ -98,12 +96,6 @@
         obj.isManual = ApiClient.convertToType(data['is_manual'], 'Boolean');
       if (data.hasOwnProperty('use_extracted'))
         obj.useExtracted = ApiClient.convertToType(data['use_extracted'], 'Boolean');
-      if (data.hasOwnProperty('clip_map'))
-        obj.clipMap = ApiClient.convertToType(data['clip_map'], 'Boolean');
-      if (data.hasOwnProperty('persist'))
-        obj.persist = ApiClient.convertToType(data['persist'], 'Boolean');
-      if (data.hasOwnProperty('dashboard_data'))
-        obj.dashboardData = ApiClient.convertToType(data['dashboard_data'], 'Boolean');
       if (data.hasOwnProperty('product_id'))
         obj.productId = ApiClient.convertToType(data['product_id'], 'Number');
       if (data.hasOwnProperty('volume_mode'))
@@ -174,12 +166,6 @@
 
   /**
    * Pile ID
-   * @member {Number} tonnage
-   */
-  exports.prototype.tonnage = undefined;
-
-  /**
-   * Pile ID
    * @member {Number} offset
    */
   exports.prototype.offset = undefined;
@@ -237,24 +223,6 @@
    * @member {Boolean} useExtracted
    */
   exports.prototype.useExtracted = undefined;
-
-  /**
-   * Is the marker locked
-   * @member {Boolean} clipMap
-   */
-  exports.prototype.clipMap = undefined;
-
-  /**
-   * Is the marker locked
-   * @member {Boolean} persist
-   */
-  exports.prototype.persist = undefined;
-
-  /**
-   * Is the marker locked
-   * @member {Boolean} dashboardData
-   */
-  exports.prototype.dashboardData = undefined;
 
   /**
    * ID of the product

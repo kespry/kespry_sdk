@@ -94,12 +94,6 @@
         // expect(instance.density).to.be(expectedValueLiteral);
       });
 
-      it('should have the property tonnage (base name: "tonnage")', function() {
-        // TODO: update the code to test the property tonnage
-        expect(instance).to.have.property('tonnage');
-        // expect(instance.tonnage).to.be(expectedValueLiteral);
-      });
-
       it('should have the property offset (base name: "offset")', function() {
         // TODO: update the code to test the property offset
         expect(instance).to.have.property('offset');
@@ -158,24 +152,6 @@
         // TODO: update the code to test the property useExtracted
         expect(instance).to.have.property('useExtracted');
         // expect(instance.useExtracted).to.be(expectedValueLiteral);
-      });
-
-      it('should have the property clipMap (base name: "clip_map")', function() {
-        // TODO: update the code to test the property clipMap
-        expect(instance).to.have.property('clipMap');
-        // expect(instance.clipMap).to.be(expectedValueLiteral);
-      });
-
-      it('should have the property persist (base name: "persist")', function() {
-        // TODO: update the code to test the property persist
-        expect(instance).to.have.property('persist');
-        // expect(instance.persist).to.be(expectedValueLiteral);
-      });
-
-      it('should have the property dashboardData (base name: "dashboard_data")', function() {
-        // TODO: update the code to test the property dashboardData
-        expect(instance).to.have.property('dashboardData');
-        // expect(instance.dashboardData).to.be(expectedValueLiteral);
       });
 
       it('should have the property productId (base name: "product_id")', function() {

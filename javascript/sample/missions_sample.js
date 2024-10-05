@@ -21,9 +21,9 @@ function promptCommand() {
   return new Promise((resolve) => rl.question(p, resolve));
 }
 
-function getSitesAsync(missionsAPI, opts) {
+function getSitesAsync(missionsAPI) {
   return new Promise((resolve, reject) => {
-    missionsAPI.getSites(opts, (error, sites, response) => {
+    missionsAPI.getSites((error, sites, response) => {
       if (error) {
         reject(error);
       } else {
@@ -32,9 +32,9 @@ function getSitesAsync(missionsAPI, opts) {
     });
   });
 }
-function getMissionsAsync(missionsAPI, opts, siteId) {
+function getMissionsAsync(missionsAPI, siteId) {
   return new Promise((resolve, reject) => {
-    missionsAPI.getMissions(parseInt(siteId), opts, (error, missions, response) => {
+    missionsAPI.getMissions(parseInt(siteId), (error, missions, response) => {
       if (error) {
         reject(error);
       } else {
@@ -43,9 +43,9 @@ function getMissionsAsync(missionsAPI, opts, siteId) {
     });
   });
 }
-function getLatestMissionAsync(missionsAPI, opts, siteId) {
+function getLatestMissionAsync(missionsAPI, siteId) {
   return new Promise((resolve, reject) => {
-    missionsAPI.getMissionsLatestForSite(parseInt(siteId), opts, (error, mission, response) => {
+    missionsAPI.getMissionsLatestForSite(parseInt(siteId), (error, mission, response) => {
       if (error) {
         reject(error);
       } else {
@@ -54,9 +54,9 @@ function getLatestMissionAsync(missionsAPI, opts, siteId) {
     });
   });
 }
-function getMarkersAsync(missionsAPI, opts, siteId, missionId) {
+function getMarkersAsync(missionsAPI, siteId, missionId) {
   return new Promise((resolve, reject) => {
-    missionsAPI.getMarkers(parseInt(missionId), parseInt(siteId), opts, (error, missions, response) => {
+    missionsAPI.getMarkers(parseInt(missionId), parseInt(siteId), (error, missions, response) => {
       if (error) {
         reject(error);
       } else {
@@ -65,9 +65,9 @@ function getMarkersAsync(missionsAPI, opts, siteId, missionId) {
     });
   });
 }
-function getVolumesAsync(missionsAPI, opts, siteId, missionId) {
+function getVolumesAsync(missionsAPI, siteId, missionId) {
   return new Promise((resolve, reject) => {
-    missionsAPI.getMarkerVolumes(parseInt(missionId), parseInt(siteId), opts, (error, missions, response) => {
+    missionsAPI.getMarkerVolumes(parseInt(missionId), parseInt(siteId), (error, missions, response) => {
       if (error) {
         reject(error);
       } else {
@@ -76,14 +76,12 @@ function getVolumesAsync(missionsAPI, opts, siteId, missionId) {
     });
   });
 }
-
 async function performOperation(operation, missionsAPI) {
     console.log(`In performOperation with ${operation}`)
-    var opts = { };
     switch (operation.toLowerCase()) {
         case '1':
           {
-            const sites = await getSitesAsync(missionsAPI, opts);
+            const sites = await getSitesAsync(missionsAPI);
             if (Array.isArray(sites)){
               console.log(`id, name, customer_id, center_lng, center_lat`);
               for (let i = 0; i < sites.length; i++) {
@@ -96,26 +94,26 @@ async function performOperation(operation, missionsAPI) {
         case '2':
           {
             const siteId = await prompt('Enter a Site ID: ');
-            const missions = await getMissionsAsync(missionsAPI, opts, siteId);
+            const missions = await getMissionsAsync(missionsAPI, siteId);
             if (Array.isArray(missions)){
-              console.log(`id, uid, status, operator, locked, captured_at, created_at, updated_at`);
+              console.log(`id, uid, status, operator, captured_at, created_at, updated_at`);
               for (let i = 0; i < missions.length; i++) {
                 let mission = missions[i];
-                console.log(`${mission["id"]}, ${mission["uid"]}, ${mission["status"]}, ${mission["operator"]}, ${mission["locked"]}, ${mission["capturedAt"]}, ${mission["createdAt"]}, ${mission["updatedAt"]}`);
+                console.log(`${mission["id"]}, ${mission["uid"]}, ${mission["status"]}, ${mission["operator"]}, ${mission["capturedAt"]}, ${mission["createdAt"]}, ${mission["updatedAt"]}`);
               }
             }
           }
           break;
           case '3':
-            const sites = await getSitesAsync(missionsAPI, opts);
+            const sites = await getSitesAsync(missionsAPI);
             if (Array.isArray(sites)){              
-              console.log(`site id, site name, mission id, uid, status, operator, locked, captured_at, created_at, updated_at`);
+              console.log(`site id, site name, mission id, uid, status, operator, captured_at, created_at, updated_at`);
               for (let i = 0; i < sites.length; i++) {
                 let site = sites[i];
                 let siteId = site["id"]
-                const mission = await getLatestMissionAsync(missionsAPI, opts, siteId)
+                const mission = await getLatestMissionAsync(missionsAPI, siteId)
                 if (mission && mission["id"]) {
-                  console.log(`${site["id"]}, ${site["name"]}, ${mission["id"]}, ${mission["uid"]}, ${mission["status"]}, ${mission["operator"]}, ${mission["locked"]}, ${mission["capturedAt"]}, ${mission["createdAt"]}, ${mission["updatedAt"]}`);
+                  console.log(`${site["id"]}, ${site["name"]}, ${mission["id"]}, ${mission["uid"]}, ${mission["status"]}, ${mission["operator"]}, ${mission["capturedAt"]}, ${mission["createdAt"]}, ${mission["updatedAt"]}`);
                 } else {
                   console.log(`${site["id"]}, ${site["name"]}, , , , , , , , `);
                 }
@@ -126,7 +124,7 @@ async function performOperation(operation, missionsAPI) {
             {
               const siteId = await prompt('Enter a Site ID: ');
               const missionId = await prompt('Enter a Mission ID: ');
-              const markers = await getMarkersAsync(missionsAPI, opts, siteId, missionId);
+              const markers = await getMarkersAsync(missionsAPI, siteId, missionId);
               if (Array.isArray(markers)){
                 console.log(`id, name, pile_id, marker_type, shape_type, density, offset, locked, use_extracted, description, known_surface_id, updated_at, updated_by`);
                 for (let i = 0; i < markers.length; i++) {
@@ -140,7 +138,7 @@ async function performOperation(operation, missionsAPI) {
             {
               const siteId = await prompt('Enter a Site ID: ');
               const missionId = await prompt('Enter a Mission ID: ');
-              const volumes = await getVolumesAsync(missionsAPI, opts, siteId, missionId);
+              const volumes = await getVolumesAsync(missionsAPI, siteId, missionId);
               if (Array.isArray(volumes)){
                 console.log(`num,name,description,surface_desc,sku,surfaceArea,perimeter,cutVolume,fillVolume,threshold,offset,computedDensity,cutMass,fillMass,usesExtracted`);
                 for (let i = 0; i < volumes.length; i++) {
@@ -188,9 +186,8 @@ async function authenticate(clientId, clientSecret) {
 
   var authAPI = new ApplicationAuthorizationApi.V1Api()
   var grantType = "client_credentials";
-  var opts = { };
 
-  authAPI.postLogin(grantType, opts, async function(error, data, response) {
+  authAPI.postLogin(grantType, async function(error, data, response) {
     if (error) {
       console.error('Authentication failed:', error.message);
       rl.close();

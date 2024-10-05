@@ -106,9 +106,6 @@ var api = new ApplicationAuthorizationApi.V1Api()
 
 var grantType = "client_credentials"; // {String} Grant type
 
-var opts = { 
-  'xFields': "xFields_example" // {String} An optional fields mask
-};
 
 var callback = function(error, data, response) {
   if (error) {
@@ -117,7 +114,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.postLogin(grantType, opts, callback);
+api.postLogin(grantType, callback);
 
 ```
 

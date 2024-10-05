@@ -41,10 +41,8 @@
           /*
           var missionId = 56;
           var siteId = 56;
-          var opts = {};
-          opts.xFields = "xFields_example";
 
-          instance.getMarkerVolumes(missionId, siteId, opts, function(error, data, response) {
+          instance.getMarkerVolumes(missionId, siteId, function(error, data, response) {
             if (error) {
               done(error);
               return;
@@ -101,10 +99,8 @@
           /*
           var missionId = 56;
           var siteId = 56;
-          var opts = {};
-          opts.xFields = "xFields_example";
 
-          instance.getMarkers(missionId, siteId, opts, function(error, data, response) {
+          instance.getMarkers(missionId, siteId, function(error, data, response) {
             if (error) {
               done(error);
               return;
@@ -134,8 +130,6 @@
               expect(data.knownSurfaceId).to.be(0);
               expect(data.density).to.be.a('number');
               expect(data.density).to.be();
-              expect(data.tonnage).to.be.a('number');
-              expect(data.tonnage).to.be();
               expect(data.offset).to.be.a('number');
               expect(data.offset).to.be();
               expect(data.fixedElevation).to.be.a('number');
@@ -156,12 +150,6 @@
               expect(data.isManual).to.be(false);
               expect(data.useExtracted).to.be.a('boolean');
               expect(data.useExtracted).to.be(false);
-              expect(data.clipMap).to.be.a('boolean');
-              expect(data.clipMap).to.be(false);
-              expect(data.persist).to.be.a('boolean');
-              expect(data.persist).to.be(false);
-              expect(data.dashboardData).to.be.a('boolean');
-              expect(data.dashboardData).to.be(false);
               expect(data.productId).to.be.a('number');
               expect(data.productId).to.be(0);
               expect(data.volumeMode).to.be.a('string');
@@ -186,10 +174,8 @@
           // TODO: uncomment, update parameter values for getMissions call and complete the assertions
           /*
           var siteId = 56;
-          var opts = {};
-          opts.xFields = "xFields_example";
 
-          instance.getMissions(siteId, opts, function(error, data, response) {
+          instance.getMissions(siteId, function(error, data, response) {
             if (error) {
               done(error);
               return;
@@ -213,10 +199,6 @@
               expect(data.updatedAt).to.be("");
               expect(data.status).to.be.a('string');
               expect(data.status).to.be("");
-              expect(data.locked).to.be.a('string');
-              expect(data.locked).to.be("");
-              expect(data.hidden).to.be.a('string');
-              expect(data.hidden).to.be("");
               expect(data.outline).to.be.a(Object);
               expect(data.outline).to.be();
               expect(data.missionOutline).to.be.a(Object);
@@ -237,10 +219,8 @@
           // TODO: uncomment, update parameter values for getMissionsLatestForSite call and complete the assertions
           /*
           var siteId = 56;
-          var opts = {};
-          opts.xFields = "xFields_example";
 
-          instance.getMissionsLatestForSite(siteId, opts, function(error, data, response) {
+          instance.getMissionsLatestForSite(siteId, function(error, data, response) {
             if (error) {
               done(error);
               return;
@@ -259,10 +239,6 @@
             expect(data.updatedAt).to.be("");
             expect(data.status).to.be.a('string');
             expect(data.status).to.be("");
-            expect(data.locked).to.be.a('string');
-            expect(data.locked).to.be("");
-            expect(data.hidden).to.be.a('string');
-            expect(data.hidden).to.be("");
             expect(data.outline).to.be.a(Object);
             expect(data.outline).to.be();
             expect(data.missionOutline).to.be.a(Object);
@@ -279,12 +255,10 @@
       });
       describe('getSites', function() {
         it('should call getSites successfully', function(done) {
-          // TODO: uncomment, update parameter values for getSites call and complete the assertions
+          // TODO: uncomment getSites call and complete the assertions
           /*
-          var opts = {};
-          opts.xFields = "xFields_example";
 
-          instance.getSites(opts, function(error, data, response) {
+          instance.getSites(function(error, data, response) {
             if (error) {
               done(error);
               return;
