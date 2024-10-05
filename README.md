@@ -8,7 +8,7 @@ Clone the repository locally.
 Run the sample application by changing your working directory into the `javascript/sample` folder and execute the following commands.
 ```
 npm install
-npm start
+KESPRY_API_HOST=https://dev-services.kespry.com npm start
 ```
 
 A valid set of API credentials (key and secret) are required for the application. 
