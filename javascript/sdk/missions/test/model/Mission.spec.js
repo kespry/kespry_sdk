@@ -76,18 +76,6 @@
         // expect(instance.status).to.be(expectedValueLiteral);
       });
 
-      it('should have the property locked (base name: "locked")', function() {
-        // TODO: update the code to test the property locked
-        expect(instance).to.have.property('locked');
-        // expect(instance.locked).to.be(expectedValueLiteral);
-      });
-
-      it('should have the property hidden (base name: "hidden")', function() {
-        // TODO: update the code to test the property hidden
-        expect(instance).to.have.property('hidden');
-        // expect(instance.hidden).to.be(expectedValueLiteral);
-      });
-
       it('should have the property outline (base name: "outline")', function() {
         // TODO: update the code to test the property outline
         expect(instance).to.have.property('outline');

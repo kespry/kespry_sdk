@@ -1,16 +1,16 @@
 {
-  "name": "missions_sample",
-  "version": "0.1.0",
-  "description": "Sample application for the Kespry Missions and Auth APIs",
-  "main": "missions_sample.js",
-  "scripts": {
-    "postinstall": "npm install --prefix ../sdk/auth && npm install --prefix ../sdk/missions",
-    "start": "KESPRY_API_HOST=https://dev-services.kespry.com node missions_sample.js"
-  },
-  "author": "software@firmatek.com",
-  "license": "ISC",
-  "dependencies": {
-    "application_authorization_api": "file:../sdk/auth",
-    "firmatek_missions_api": "file:../sdk/missions"
+    "name": "missions_sample",
+    "version": "0.1.0",
+    "description": "Sample application for the Kespry Missions and Auth APIs",
+    "main": "missions_sample.js",
+    "scripts": {
+      "postinstall": "npm install --prefix ../sdk/auth && npm install --prefix ../sdk/missions",
+      "start": "node missions_sample.js"
+    },
+    "author": "software@firmatek.com",
+    "license": "ISC",
+    "dependencies": {
+      "application_authorization_api": "file:../sdk/auth",
+      "firmatek_missions_api": "file:../sdk/missions"
+    }
   }
-}

@@ -58,13 +58,10 @@
     /**
      * @param {Number} missionId ID of the mission
      * @param {Number} siteId ID of the site
-     * @param {Object} opts Optional parameters
-     * @param {String} opts.xFields An optional fields mask
      * @param {module:api/V1Api~getMarkerVolumesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/MarkerVolume>}
      */
-    this.getMarkerVolumes = function(missionId, siteId, opts, callback) {
-      opts = opts || {};
+    this.getMarkerVolumes = function(missionId, siteId, callback) {
       var postBody = null;
 
       // verify the required parameter 'missionId' is set
@@ -87,7 +84,6 @@
       var collectionQueryParams = {
       };
       var headerParams = {
-        'X-Fields': opts['xFields']
       };
       var formParams = {
       };
@@ -115,13 +111,10 @@
     /**
      * @param {Number} missionId ID of the mission
      * @param {Number} siteId ID of the site
-     * @param {Object} opts Optional parameters
-     * @param {String} opts.xFields An optional fields mask
      * @param {module:api/V1Api~getMarkersCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/Marker>}
      */
-    this.getMarkers = function(missionId, siteId, opts, callback) {
-      opts = opts || {};
+    this.getMarkers = function(missionId, siteId, callback) {
       var postBody = null;
 
       // verify the required parameter 'missionId' is set
@@ -144,7 +137,6 @@
       var collectionQueryParams = {
       };
       var headerParams = {
-        'X-Fields': opts['xFields']
       };
       var formParams = {
       };
@@ -171,13 +163,10 @@
 
     /**
      * @param {Number} siteId ID of the site
-     * @param {Object} opts Optional parameters
-     * @param {String} opts.xFields An optional fields mask
      * @param {module:api/V1Api~getMissionsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/Mission>}
      */
-    this.getMissions = function(siteId, opts, callback) {
-      opts = opts || {};
+    this.getMissions = function(siteId, callback) {
       var postBody = null;
 
       // verify the required parameter 'siteId' is set
@@ -194,7 +183,6 @@
       var collectionQueryParams = {
       };
       var headerParams = {
-        'X-Fields': opts['xFields']
       };
       var formParams = {
       };
@@ -221,13 +209,10 @@
 
     /**
      * @param {Number} siteId ID of the site
-     * @param {Object} opts Optional parameters
-     * @param {String} opts.xFields An optional fields mask
      * @param {module:api/V1Api~getMissionsLatestForSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/Mission}
      */
-    this.getMissionsLatestForSite = function(siteId, opts, callback) {
-      opts = opts || {};
+    this.getMissionsLatestForSite = function(siteId, callback) {
       var postBody = null;
 
       // verify the required parameter 'siteId' is set
@@ -244,7 +229,6 @@
       var collectionQueryParams = {
       };
       var headerParams = {
-        'X-Fields': opts['xFields']
       };
       var formParams = {
       };
@@ -270,13 +254,10 @@
      */
 
     /**
-     * @param {Object} opts Optional parameters
-     * @param {String} opts.xFields An optional fields mask
      * @param {module:api/V1Api~getSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/Site>}
      */
-    this.getSites = function(opts, callback) {
-      opts = opts || {};
+    this.getSites = function(callback) {
       var postBody = null;
 
 
@@ -287,7 +268,6 @@
       var collectionQueryParams = {
       };
       var headerParams = {
-        'X-Fields': opts['xFields']
       };
       var formParams = {
       };

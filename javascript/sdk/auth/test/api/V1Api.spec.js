@@ -40,10 +40,8 @@
           // TODO: uncomment, update parameter values for postLogin call and complete the assertions
           /*
           var grantType = "client_credentials";
-          var opts = {};
-          opts.xFields = "xFields_example";
 
-          instance.postLogin(grantType, opts, function(error, data, response) {
+          instance.postLogin(grantType, function(error, data, response) {
             if (error) {
               done(error);
               return;

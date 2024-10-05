@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 <a name="getMarkerVolumes"></a>
 # **getMarkerVolumes**
-> [MarkerVolume] getMarkerVolumes(missionId, siteId, opts)
+> [MarkerVolume] getMarkerVolumes(missionId, siteId)
 
 
 
@@ -34,9 +34,6 @@ var missionId = 56; // Number | ID of the mission
 
 var siteId = 56; // Number | ID of the site
 
-var opts = { 
-  'xFields': "xFields_example" // String | An optional fields mask
-};
 
 var callback = function(error, data, response) {
   if (error) {
@@ -45,7 +42,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getMarkerVolumes(missionId, siteId, opts, callback);
+apiInstance.getMarkerVolumes(missionId, siteId, callback);
 ```
 
 ### Parameters
@@ -54,7 +51,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **missionId** | **Number**| ID of the mission | 
  **siteId** | **Number**| ID of the site | 
- **xFields** | **String**| An optional fields mask | [optional] 
 
 ### Return type
 
@@ -71,7 +67,7 @@ Name | Type | Description  | Notes
 
 <a name="getMarkers"></a>
 # **getMarkers**
-> [Marker] getMarkers(missionId, siteId, opts)
+> [Marker] getMarkers(missionId, siteId)
 
 
 
@@ -92,9 +88,6 @@ var missionId = 56; // Number | ID of the mission
 
 var siteId = 56; // Number | ID of the site
 
-var opts = { 
-  'xFields': "xFields_example" // String | An optional fields mask
-};
 
 var callback = function(error, data, response) {
   if (error) {
@@ -103,7 +96,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getMarkers(missionId, siteId, opts, callback);
+apiInstance.getMarkers(missionId, siteId, callback);
 ```
 
 ### Parameters
@@ -112,7 +105,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **missionId** | **Number**| ID of the mission | 
  **siteId** | **Number**| ID of the site | 
- **xFields** | **String**| An optional fields mask | [optional] 
 
 ### Return type
 
@@ -129,7 +121,7 @@ Name | Type | Description  | Notes
 
 <a name="getMissions"></a>
 # **getMissions**
-> [Mission] getMissions(siteId, opts)
+> [Mission] getMissions(siteId)
 
 
 
@@ -148,9 +140,6 @@ var apiInstance = new FirmatekMissionsApi.V1Api();
 
 var siteId = 56; // Number | ID of the site
 
-var opts = { 
-  'xFields': "xFields_example" // String | An optional fields mask
-};
 
 var callback = function(error, data, response) {
   if (error) {
@@ -159,7 +148,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getMissions(siteId, opts, callback);
+apiInstance.getMissions(siteId, callback);
 ```
 
 ### Parameters
@@ -167,7 +156,6 @@ apiInstance.getMissions(siteId, opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteId** | **Number**| ID of the site | 
- **xFields** | **String**| An optional fields mask | [optional] 
 
 ### Return type
 
@@ -184,7 +172,7 @@ Name | Type | Description  | Notes
 
 <a name="getMissionsLatestForSite"></a>
 # **getMissionsLatestForSite**
-> Mission getMissionsLatestForSite(siteId, opts)
+> Mission getMissionsLatestForSite(siteId)
 
 
 
@@ -203,9 +191,6 @@ var apiInstance = new FirmatekMissionsApi.V1Api();
 
 var siteId = 56; // Number | ID of the site
 
-var opts = { 
-  'xFields': "xFields_example" // String | An optional fields mask
-};
 
 var callback = function(error, data, response) {
   if (error) {
@@ -214,7 +199,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getMissionsLatestForSite(siteId, opts, callback);
+apiInstance.getMissionsLatestForSite(siteId, callback);
 ```
 
 ### Parameters
@@ -222,7 +207,6 @@ apiInstance.getMissionsLatestForSite(siteId, opts, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **siteId** | **Number**| ID of the site | 
- **xFields** | **String**| An optional fields mask | [optional] 
 
 ### Return type
 
@@ -239,7 +223,7 @@ Name | Type | Description  | Notes
 
 <a name="getSites"></a>
 # **getSites**
-> [Site] getSites(opts)
+> [Site] getSites()
 
 
 
@@ -256,10 +240,6 @@ apikey.apiKey = 'YOUR API KEY';
 
 var apiInstance = new FirmatekMissionsApi.V1Api();
 
-var opts = { 
-  'xFields': "xFields_example" // String | An optional fields mask
-};
-
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
@@ -267,14 +247,11 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.getSites(opts, callback);
+apiInstance.getSites(callback);
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **xFields** | **String**| An optional fields mask | [optional] 
+This endpoint does not need any parameter.
 
 ### Return type
 

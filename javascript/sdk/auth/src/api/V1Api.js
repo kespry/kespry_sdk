@@ -57,13 +57,10 @@
 
     /**
      * @param {String} grantType Grant type
-     * @param {Object} opts Optional parameters
-     * @param {String} opts.xFields An optional fields mask
      * @param {module:api/V1Api~postLoginCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/Auth}
      */
-    this.postLogin = function(grantType, opts, callback) {
-      opts = opts || {};
+    this.postLogin = function(grantType, callback) {
       var postBody = null;
 
       // verify the required parameter 'grantType' is set
@@ -79,7 +76,6 @@
       var collectionQueryParams = {
       };
       var headerParams = {
-        'X-Fields': opts['xFields']
       };
       var formParams = {
         'grant_type': grantType

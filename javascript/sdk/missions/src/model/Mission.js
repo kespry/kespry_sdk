@@ -68,10 +68,6 @@
         obj.updatedAt = ApiClient.convertToType(data['updated_at'], 'String');
       if (data.hasOwnProperty('status'))
         obj.status = ApiClient.convertToType(data['status'], 'String');
-      if (data.hasOwnProperty('locked'))
-        obj.locked = ApiClient.convertToType(data['locked'], 'String');
-      if (data.hasOwnProperty('hidden'))
-        obj.hidden = ApiClient.convertToType(data['hidden'], 'String');
       if (data.hasOwnProperty('outline'))
         obj.outline = ApiClient.convertToType(data['outline'], Object);
       if (data.hasOwnProperty('mission_outline'))
@@ -117,18 +113,6 @@
    * @member {String} status
    */
   exports.prototype.status = undefined;
-
-  /**
-   * Is this mission locked
-   * @member {String} locked
-   */
-  exports.prototype.locked = undefined;
-
-  /**
-   * Hidden TODO: Remove this from here...
-   * @member {String} hidden
-   */
-  exports.prototype.hidden = undefined;
 
   /**
    * Mission outline as a GeoJson format in WGS84

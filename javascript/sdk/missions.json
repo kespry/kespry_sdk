@@ -19,15 +19,6 @@
                     }
                 },
                 "operationId": "get_sites",
-                "parameters": [
-                    {
-                        "name": "X-Fields",
-                        "in": "header",
-                        "type": "string",
-                        "format": "mask",
-                        "description": "An optional fields mask"
-                    }
-                ],
                 "tags": [
                     "v1"
                 ]
@@ -59,15 +50,6 @@
                     }
                 },
                 "operationId": "get_missions",
-                "parameters": [
-                    {
-                        "name": "X-Fields",
-                        "in": "header",
-                        "type": "string",
-                        "format": "mask",
-                        "description": "An optional fields mask"
-                    }
-                ],
                 "tags": [
                     "v1"
                 ]
@@ -96,15 +78,6 @@
                     }
                 },
                 "operationId": "get_missions_latest_for_site",
-                "parameters": [
-                    {
-                        "name": "X-Fields",
-                        "in": "header",
-                        "type": "string",
-                        "format": "mask",
-                        "description": "An optional fields mask"
-                    }
-                ],
                 "tags": [
                     "v1"
                 ]
@@ -146,15 +119,6 @@
                     }
                 },
                 "operationId": "get_markers",
-                "parameters": [
-                    {
-                        "name": "X-Fields",
-                        "in": "header",
-                        "type": "string",
-                        "format": "mask",
-                        "description": "An optional fields mask"
-                    }
-                ],
                 "tags": [
                     "v1"
                 ]
@@ -196,15 +160,6 @@
                     }
                 },
                 "operationId": "get_marker_volumes",
-                "parameters": [
-                    {
-                        "name": "X-Fields",
-                        "in": "header",
-                        "type": "string",
-                        "format": "mask",
-                        "description": "An optional fields mask"
-                    }
-                ],
                 "tags": [
                     "v1"
                 ]
@@ -215,7 +170,7 @@
         "title": "Firmatek Missions API",
         "version": "1.0",
         "description": "Missions API for accessing Missions in the Kespry Platform",
-        "termsOfService": "/terms"
+        "termsOfService": "https://firmatek.com/terms-of-use/"
     },
     "produces": [
         "application/json"
@@ -319,14 +274,6 @@
                     "type": "string",
                     "description": "Mission status"
                 },
-                "locked": {
-                    "type": "string",
-                    "description": "Is this mission locked"
-                },
-                "hidden": {
-                    "type": "string",
-                    "description": "Hidden TODO: Remove this from here..."
-                },
                 "outline": {
                     "type": "object",
                     "description": "Mission outline as a GeoJson format in WGS84"
@@ -384,10 +331,6 @@
                     "type": "number",
                     "description": "Pile ID"
                 },
-                "tonnage": {
-                    "type": "number",
-                    "description": "Pile ID"
-                },
                 "offset": {
                     "type": "number",
                     "description": "Pile ID"
@@ -425,18 +368,6 @@
                     "description": "Is the marker manual or assigned to an inventory product"
                 },
                 "use_extracted": {
-                    "type": "boolean",
-                    "description": "Is the marker locked"
-                },
-                "clip_map": {
-                    "type": "boolean",
-                    "description": "Is the marker locked"
-                },
-                "persist": {
-                    "type": "boolean",
-                    "description": "Is the marker locked"
-                },
-                "dashboard_data": {
                     "type": "boolean",
                     "description": "Is the marker locked"
                 },
