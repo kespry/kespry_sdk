@@ -12,7 +12,7 @@ Run the sample application by changing your working directory into the `javascri
 ```
 cd kespry_sdk/javascript/sample
 npm install
-KESPRY_API_HOST=https://staging-services.kespry.com npm start
+npm start
 ```
 
 A valid set of API credentials (key and secret) are required for the application. 
