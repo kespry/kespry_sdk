@@ -3,7 +3,7 @@ var FirmatekMissionsApi = require('firmatek_missions_api');
 
 const { resolve } = require('path');
 
-const kespry_api_host = process.env.KESPRY_API_HOST || 'http://host.docker.internal:3001'
+const kespry_api_host = process.env.KESPRY_API_HOST || 'https://staging-services.kespry.com'
 
 const readline = require('readline');
 
@@ -170,7 +170,11 @@ async function processCommands(data) {
   while (continueLoop) {
       const operation = await promptCommand();
       console.log(`Operation: ${operation}`);
-      continueLoop = await performOperation(operation, missionsAPI);
+      try {
+        continueLoop = await performOperation(operation, missionsAPI);
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
   }
 };
   
