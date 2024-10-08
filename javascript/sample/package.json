@@ -4,7 +4,7 @@
     "description": "Sample application for the Kespry Missions and Auth APIs",
     "main": "missions_sample.js",
     "scripts": {
-      "postinstall": "npm install --prefix ../sdk/auth && npm install --prefix ../sdk/missions",
+      "postinstall": "node postinstall.js",
       "start": "node missions_sample.js"
     },
     "author": "software@firmatek.com",
@@ -12,5 +12,9 @@
     "dependencies": {
       "application_authorization_api": "file:../sdk/auth",
       "firmatek_missions_api": "file:../sdk/missions"
+    },
+    "devDependencies": {
+      "cross-env": "^7.0.3",
+      "shx": "^0.3.2"
     }
   }
