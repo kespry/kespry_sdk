@@ -100,12 +100,10 @@
         obj.productId = ApiClient.convertToType(data['product_id'], 'Number');
       if (data.hasOwnProperty('volume_mode'))
         obj.volumeMode = ApiClient.convertToType(data['volume_mode'], 'String');
-      if (data.hasOwnProperty('volume'))
-        obj.volume = ApiClient.convertToType(data['volume'], Object);
-      if (data.hasOwnProperty('defeatured_volume'))
-        obj.defeaturedVolume = ApiClient.convertToType(data['defeatured_volume'], Object);
       if (data.hasOwnProperty('base_points'))
         obj.basePoints = ApiClient.convertToType(data['base_points'], Object);
+      if (data.hasOwnProperty('messages'))
+        obj.messages = ApiClient.convertToType(data['messages'], [Object]);
     }
     return obj;
   }
@@ -135,13 +133,13 @@
   exports.prototype.description = undefined;
 
   /**
-   * Marker type
+   * Marker type,  0: point, 1: cross section, 2: model volume, 3: volume, 4: inventory volume, 5: area, 6: compliance line, 7: markup, 8: external (Firmatek Services)
    * @member {Number} markerType
    */
   exports.prototype.markerType = undefined;
 
   /**
-   * Marker type
+   * Marker type: Point, LineString or Polygon
    * @member {String} shapeType
    */
   exports.prototype.shapeType = undefined;
@@ -153,25 +151,25 @@
   exports.prototype.pileId = undefined;
 
   /**
-   * Pile ID
+   * ID of the known surface if the if the volume_mode is \"known_surface\"
    * @member {Number} knownSurfaceId
    */
   exports.prototype.knownSurfaceId = undefined;
 
   /**
-   * Pile ID
+   * Density (kg/m3)
    * @member {Number} density
    */
   exports.prototype.density = undefined;
 
   /**
-   * Pile ID
+   * Volume offset
    * @member {Number} offset
    */
   exports.prototype.offset = undefined;
 
   /**
-   * Pile ID
+   * Elevation to use as the base of the pile if the volume_mode is \"fixed_elevation\" (m)
    * @member {Number} fixedElevation
    */
   exports.prototype.fixedElevation = undefined;
@@ -183,13 +181,13 @@
   exports.prototype.geojson = undefined;
 
   /**
-   * Date the marker was created
+   * Date the marker was created (UTC)
    * @member {String} createdAt
    */
   exports.prototype.createdAt = undefined;
 
   /**
-   * Date the marker was update
+   * Date the marker was updated (UTC)
    * @member {String} updatedAt
    */
   exports.prototype.updatedAt = undefined;
@@ -219,40 +217,34 @@
   exports.prototype.isManual = undefined;
 
   /**
-   * Is the marker locked
+   * When true, reported volumes use the feature extracted DSM data
    * @member {Boolean} useExtracted
    */
   exports.prototype.useExtracted = undefined;
 
   /**
-   * ID of the product
+   * ID of the product used if is_manual is False
    * @member {Number} productId
    */
   exports.prototype.productId = undefined;
 
   /**
-   * Volume mode for the marker if it is a volume based marker
+   * Volume mode for the marker if it is a volume based marker. Values are base_points, fixed_elevation, known_surface or none
    * @member {String} volumeMode
    */
   exports.prototype.volumeMode = undefined;
 
   /**
-   * Volume mode for the marker if it is a volume based marker
-   * @member {Object} volume
-   */
-  exports.prototype.volume = undefined;
-
-  /**
-   * Volume mode for the marker if it is a volume based marker
-   * @member {Object} defeaturedVolume
-   */
-  exports.prototype.defeaturedVolume = undefined;
-
-  /**
-   * Volume mode for the marker if it is a volume based marker
+   * Base points used to define the base of the pile if volume_mode is \"base_points\"
    * @member {Object} basePoints
    */
   exports.prototype.basePoints = undefined;
+
+  /**
+   * Processing messages. If present is an array of objects of the form { \"code\": \"small_base_points_area\", \"level\": \"warn\", \"message\": \"Your base points only cover a small area. For accurate measurement add more points over a larger area if possible.\"}
+   * @member {Array.<Object>} messages
+   */
+  exports.prototype.messages = undefined;
 
 
   return exports;

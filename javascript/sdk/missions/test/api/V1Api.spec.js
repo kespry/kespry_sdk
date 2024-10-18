@@ -63,25 +63,25 @@
               expect(data.surfaceDesc).to.be.a('string');
               expect(data.surfaceDesc).to.be("");
               expect(data.sku).to.be.a('string');
-              expect(data.sku).to.be("");
+              expect(data.sku).to.be("123456");
               expect(data.surfaceArea).to.be.a('number');
-              expect(data.surfaceArea).to.be();
+              expect(data.surfaceArea).to.be(411.09);
               expect(data.perimeter).to.be.a('number');
-              expect(data.perimeter).to.be();
+              expect(data.perimeter).to.be(91.23);
               expect(data.cutVolume).to.be.a('number');
-              expect(data.cutVolume).to.be();
+              expect(data.cutVolume).to.be(608.44);
               expect(data.fillVolume).to.be.a('number');
-              expect(data.fillVolume).to.be();
+              expect(data.fillVolume).to.be(3.84);
               expect(data.threshold).to.be.a('number');
               expect(data.threshold).to.be();
               expect(data.offset).to.be.a('number');
               expect(data.offset).to.be();
-              expect(data.computedDensity).to.be.a('number');
-              expect(data.computedDensity).to.be();
+              expect(data.density).to.be.a('number');
+              expect(data.density).to.be(1500.0);
               expect(data.cutMass).to.be.a('number');
-              expect(data.cutMass).to.be();
+              expect(data.cutMass).to.be(912657.94);
               expect(data.fillMass).to.be.a('number');
-              expect(data.fillMass).to.be();
+              expect(data.fillMass).to.be(5757.52);
               expect(data.usesExtracted).to.be.a('boolean');
               expect(data.usesExtracted).to.be(false);
             }
@@ -154,12 +154,18 @@
               expect(data.productId).to.be(0);
               expect(data.volumeMode).to.be.a('string');
               expect(data.volumeMode).to.be("");
-              expect(data.volume).to.be.a(Object);
-              expect(data.volume).to.be();
-              expect(data.defeaturedVolume).to.be.a(Object);
-              expect(data.defeaturedVolume).to.be();
               expect(data.basePoints).to.be.a(Object);
               expect(data.basePoints).to.be();
+              {
+                let dataCtr = data.messages;
+                expect(dataCtr).to.be.an(Array);
+                expect(dataCtr).to.not.be.empty();
+                for (let p in dataCtr) {
+                  let data = dataCtr[p];
+                  expect(data).to.be.a(Object);
+                  expect(data).to.be();
+                }
+              }
             }
 
             done();
@@ -284,8 +290,8 @@
               expect(data.outline).to.be();
               expect(data.createdAt).to.be.a('string');
               expect(data.createdAt).to.be("");
-              expect(data.updateAt).to.be.a('string');
-              expect(data.updateAt).to.be("");
+              expect(data.updatedAt).to.be.a('string');
+              expect(data.updatedAt).to.be("");
             }
 
             done();

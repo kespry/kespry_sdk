@@ -56,6 +56,7 @@
      */
 
     /**
+     * Authenticates the supplied client ID and secret and returns an OAuth authentication token.
      * @param {String} grantType Grant type
      * @param {module:api/V1Api~postLoginCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/Auth}

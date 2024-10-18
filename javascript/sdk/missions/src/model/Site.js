@@ -74,8 +74,8 @@
         obj.outline = ApiClient.convertToType(data['outline'], Object);
       if (data.hasOwnProperty('created_at'))
         obj.createdAt = ApiClient.convertToType(data['created_at'], 'String');
-      if (data.hasOwnProperty('update_at'))
-        obj.updateAt = ApiClient.convertToType(data['update_at'], 'String');
+      if (data.hasOwnProperty('updated_at'))
+        obj.updatedAt = ApiClient.convertToType(data['updated_at'], 'String');
     }
     return obj;
   }
@@ -117,16 +117,16 @@
   exports.prototype.outline = undefined;
 
   /**
-   * Date the site was created
+   * Date the site was created (UTC)
    * @member {String} createdAt
    */
   exports.prototype.createdAt = undefined;
 
   /**
-   * Date the site was update
-   * @member {String} updateAt
+   * Date the site was update (UTC)
+   * @member {String} updatedAt
    */
-  exports.prototype.updateAt = undefined;
+  exports.prototype.updatedAt = undefined;
 
 
   return exports;

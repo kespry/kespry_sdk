@@ -18,6 +18,7 @@
                         }
                     }
                 },
+                "description": "Returns all Sites",
                 "operationId": "get_sites",
                 "tags": [
                     "v1"
@@ -27,8 +28,8 @@
         "/v1/sites/{site_id}/missions": {
             "parameters": [
                 {
-                    "in": "path",
                     "description": "ID of the site",
+                    "in": "path",
                     "name": "site_id",
                     "required": true,
                     "type": "integer"
@@ -49,6 +50,7 @@
                         }
                     }
                 },
+                "description": "Returns all missions for the specified site that are less than 90 days old.",
                 "operationId": "get_missions",
                 "tags": [
                     "v1"
@@ -58,8 +60,8 @@
         "/v1/sites/{site_id}/missions/latest": {
             "parameters": [
                 {
-                    "in": "path",
                     "description": "ID of the site",
+                    "in": "path",
                     "name": "site_id",
                     "required": true,
                     "type": "integer"
@@ -77,6 +79,7 @@
                         }
                     }
                 },
+                "description": "Returns the latest mission for the specified site (if there are any that are less than 90 days old).",
                 "operationId": "get_missions_latest_for_site",
                 "tags": [
                     "v1"
@@ -118,6 +121,7 @@
                         }
                     }
                 },
+                "description": "Returns all markers for the specified mission",
                 "operationId": "get_markers",
                 "tags": [
                     "v1"
@@ -159,6 +163,7 @@
                         }
                     }
                 },
+                "description": "Returns all volumes for the specified mission. Note that markers of type model volume (marker_type=2) may return two records if multiple surfaces are specified. This data should match the data retrieved from the CSV download from the Volume Report.",
                 "operationId": "get_marker_volumes",
                 "tags": [
                     "v1"
@@ -199,7 +204,7 @@
     "tags": [
         {
             "name": "v1",
-            "description": "APIs for accessing Kespry Missions"
+            "description": "APIs for accessing Kespry Missions. Missions are captured for each Site. Each mission may have multiple markers that represent different ways to analyze the mission data. Volume marker types report volume values."
         }
     ],
     "definitions": {
@@ -236,11 +241,11 @@
                 },
                 "created_at": {
                     "type": "string",
-                    "description": "Date the site was created"
+                    "description": "Date the site was created (UTC)"
                 },
-                "update_at": {
+                "updated_at": {
                     "type": "string",
-                    "description": "Date the site was update"
+                    "description": "Date the site was update (UTC)"
                 }
             },
             "type": "object"
@@ -256,23 +261,23 @@
                 },
                 "uid": {
                     "type": "string",
-                    "description": "Fly ID"
+                    "description": "Internal image ID used by support"
                 },
                 "captured_at": {
                     "type": "string",
-                    "description": "Date the mission was captured"
+                    "description": "Date the mission was captured (UTC)"
                 },
                 "created_at": {
                     "type": "string",
-                    "description": "Date the mission was created"
+                    "description": "Date the mission was created (UTC)"
                 },
                 "updated_at": {
                     "type": "string",
-                    "description": "Date the mission was updated"
+                    "description": "Date the mission was updated (UTC)"
                 },
                 "status": {
                     "type": "string",
-                    "description": "Mission status"
+                    "description": "Mission status. Values are pending, pending_gps_update, waiting_for_gps_data, complete, preprocessing, waiting_for_upload, processing_error, or manual_processing"
                 },
                 "outline": {
                     "type": "object",
@@ -313,11 +318,11 @@
                 },
                 "marker_type": {
                     "type": "integer",
-                    "description": "Marker type"
+                    "description": "Marker type,  0: point, 1: cross section, 2: model volume, 3: volume, 4: inventory volume, 5: area, 6: compliance line, 7: markup, 8: external (Firmatek Services)"
                 },
                 "shape_type": {
                     "type": "string",
-                    "description": "Marker type"
+                    "description": "Marker type: Point, LineString or Polygon"
                 },
                 "pile_id": {
                     "type": "integer",
@@ -325,19 +330,19 @@
                 },
                 "known_surface_id": {
                     "type": "integer",
-                    "description": "Pile ID"
+                    "description": "ID of the known surface if the if the volume_mode is \"known_surface\""
                 },
                 "density": {
                     "type": "number",
-                    "description": "Pile ID"
+                    "description": "Density (kg/m3)"
                 },
                 "offset": {
                     "type": "number",
-                    "description": "Pile ID"
+                    "description": "Volume offset"
                 },
                 "fixed_elevation": {
                     "type": "number",
-                    "description": "Pile ID"
+                    "description": "Elevation to use as the base of the pile if the volume_mode is \"fixed_elevation\" (m)"
                 },
                 "geojson": {
                     "type": "object",
@@ -345,11 +350,11 @@
                 },
                 "created_at": {
                     "type": "string",
-                    "description": "Date the marker was created"
+                    "description": "Date the marker was created (UTC)"
                 },
                 "updated_at": {
                     "type": "string",
-                    "description": "Date the marker was update"
+                    "description": "Date the marker was updated (UTC)"
                 },
                 "created_by": {
                     "type": "string",
@@ -369,27 +374,26 @@
                 },
                 "use_extracted": {
                     "type": "boolean",
-                    "description": "Is the marker locked"
+                    "description": "When true, reported volumes use the feature extracted DSM data"
                 },
                 "product_id": {
                     "type": "integer",
-                    "description": "ID of the product"
+                    "description": "ID of the product used if is_manual is False"
                 },
                 "volume_mode": {
                     "type": "string",
-                    "description": "Volume mode for the marker if it is a volume based marker"
-                },
-                "volume": {
-                    "type": "object",
-                    "description": "Volume mode for the marker if it is a volume based marker"
-                },
-                "defeatured_volume": {
-                    "type": "object",
-                    "description": "Volume mode for the marker if it is a volume based marker"
+                    "description": "Volume mode for the marker if it is a volume based marker. Values are base_points, fixed_elevation, known_surface or none"
                 },
                 "base_points": {
                     "type": "object",
-                    "description": "Volume mode for the marker if it is a volume based marker"
+                    "description": "Base points used to define the base of the pile if volume_mode is \"base_points\""
+                },
+                "messages": {
+                    "type": "array",
+                    "description": "Processing messages. If present is an array of objects of the form { \"code\": \"small_base_points_area\", \"level\": \"warn\", \"message\": \"Your base points only cover a small area. For accurate measurement add more points over a larger area if possible.\"}",
+                    "items": {
+                        "type": "object"
+                    }
                 }
             },
             "type": "object"
@@ -418,23 +422,28 @@
                 },
                 "sku": {
                     "type": "string",
-                    "description": "SKU Number"
+                    "description": "SKU Number",
+                    "example": "123456"
                 },
                 "surfaceArea": {
                     "type": "number",
-                    "description": "Area (m2)"
+                    "description": "Area (m2)",
+                    "example": 411.09
                 },
                 "perimeter": {
                     "type": "number",
-                    "description": "Perimeter (m)"
+                    "description": "Perimeter (m)",
+                    "example": 91.23
                 },
                 "cutVolume": {
                     "type": "number",
-                    "description": "Cut Volume"
+                    "description": "Cut Volume (m3)",
+                    "example": 608.44
                 },
                 "fillVolume": {
                     "type": "number",
-                    "description": "Fill Volume"
+                    "description": "Fill Volume (m3)",
+                    "example": 3.84
                 },
                 "threshold": {
                     "type": "number",
@@ -442,23 +451,26 @@
                 },
                 "offset": {
                     "type": "number",
-                    "description": "Offset"
+                    "description": "Offset (m3)"
                 },
-                "computedDensity": {
+                "density": {
                     "type": "number",
-                    "description": "Density"
+                    "description": "Density (kg/m3)",
+                    "example": 1500.0
                 },
                 "cutMass": {
                     "type": "number",
-                    "description": "Cut Mass"
+                    "description": "Cut Mass (kg)",
+                    "example": 912657.94
                 },
                 "fillMass": {
                     "type": "number",
-                    "description": "Fill Mass"
+                    "description": "Fill Mass (kg)",
+                    "example": 5757.52
                 },
                 "usesExtracted": {
                     "type": "boolean",
-                    "description": "Uses Extracted"
+                    "description": "Indicates if the volume values were calculated using the feature extracted DSM"
                 }
             },
             "type": "object"

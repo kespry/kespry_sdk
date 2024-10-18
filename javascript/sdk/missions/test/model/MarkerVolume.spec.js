@@ -106,10 +106,10 @@
         // expect(instance.offset).to.be(expectedValueLiteral);
       });
 
-      it('should have the property computedDensity (base name: "computedDensity")', function() {
-        // TODO: update the code to test the property computedDensity
-        expect(instance).to.have.property('computedDensity');
-        // expect(instance.computedDensity).to.be(expectedValueLiteral);
+      it('should have the property density (base name: "density")', function() {
+        // TODO: update the code to test the property density
+        expect(instance).to.have.property('density');
+        // expect(instance.density).to.be(expectedValueLiteral);
       });
 
       it('should have the property cutMass (base name: "cutMass")', function() {

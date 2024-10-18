@@ -140,10 +140,10 @@ async function performOperation(operation, missionsAPI) {
               const missionId = await prompt('Enter a Mission ID: ');
               const volumes = await getVolumesAsync(missionsAPI, siteId, missionId);
               if (Array.isArray(volumes)){
-                console.log(`num,name,description,surface_desc,sku,surfaceArea,perimeter,cutVolume,fillVolume,threshold,offset,computedDensity,cutMass,fillMass,usesExtracted`);
+                console.log(`num,name,description,surface_desc,sku,surfaceArea,perimeter,cutVolume,fillVolume,threshold,offset,density,cutMass,fillMass,usesExtracted`);
                 for (let i = 0; i < volumes.length; i++) {
                   let volume = volumes[i];
-                  console.log(`${volume["num"]}, ${volume["name"]}, ${volume["description"]}, ${volume["surfaceDesc"]}, ${volume["sku"]}, ${volume["surfaceArea"]}, ${volume["perimeter"]}, ${volume["cutVolume"]}, ${volume["fillVolume"]}, ${volume["threshold"]}, ${volume["offset"]}, ${volume["computedDensity"]}, ${volume["cutMass"]}, ${volume["fillMass"]}, ${volume["usesExtracted"]}`);
+                  console.log(`${volume["num"]}, ${volume["name"]}, ${volume["description"]}, ${volume["surfaceDesc"]}, ${volume["sku"]}, ${volume["surfaceArea"]}, ${volume["perimeter"]}, ${volume["cutVolume"]}, ${volume["fillVolume"]}, ${volume["threshold"]}, ${volume["offset"]}, ${volume["density"]}, ${volume["cutMass"]}, ${volume["fillMass"]}, ${volume["usesExtracted"]}`);
                 }
               }
             }

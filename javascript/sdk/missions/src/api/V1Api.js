@@ -56,6 +56,7 @@
      */
 
     /**
+     * Returns all volumes for the specified mission. Note that markers of type model volume (marker_type=2) may return two records if multiple surfaces are specified. This data should match the data retrieved from the CSV download from the Volume Report.
      * @param {Number} missionId ID of the mission
      * @param {Number} siteId ID of the site
      * @param {module:api/V1Api~getMarkerVolumesCallback} callback The callback function, accepting three arguments: error, data, response
@@ -109,6 +110,7 @@
      */
 
     /**
+     * Returns all markers for the specified mission
      * @param {Number} missionId ID of the mission
      * @param {Number} siteId ID of the site
      * @param {module:api/V1Api~getMarkersCallback} callback The callback function, accepting three arguments: error, data, response
@@ -162,6 +164,7 @@
      */
 
     /**
+     * Returns all missions for the specified site that are less than 90 days old.
      * @param {Number} siteId ID of the site
      * @param {module:api/V1Api~getMissionsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/Mission>}
@@ -208,6 +211,7 @@
      */
 
     /**
+     * Returns the latest mission for the specified site (if there are any that are less than 90 days old).
      * @param {Number} siteId ID of the site
      * @param {module:api/V1Api~getMissionsLatestForSiteCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/Mission}
@@ -254,6 +258,7 @@
      */
 
     /**
+     * Returns all Sites
      * @param {module:api/V1Api~getSitesCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/Site>}
      */
