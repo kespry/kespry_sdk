@@ -166,22 +166,16 @@
         // expect(instance.volumeMode).to.be(expectedValueLiteral);
       });
 
-      it('should have the property volume (base name: "volume")', function() {
-        // TODO: update the code to test the property volume
-        expect(instance).to.have.property('volume');
-        // expect(instance.volume).to.be(expectedValueLiteral);
-      });
-
-      it('should have the property defeaturedVolume (base name: "defeatured_volume")', function() {
-        // TODO: update the code to test the property defeaturedVolume
-        expect(instance).to.have.property('defeaturedVolume');
-        // expect(instance.defeaturedVolume).to.be(expectedValueLiteral);
-      });
-
       it('should have the property basePoints (base name: "base_points")', function() {
         // TODO: update the code to test the property basePoints
         expect(instance).to.have.property('basePoints');
         // expect(instance.basePoints).to.be(expectedValueLiteral);
+      });
+
+      it('should have the property messages (base name: "messages")', function() {
+        // TODO: update the code to test the property messages
+        expect(instance).to.have.property('messages');
+        // expect(instance.messages).to.be(expectedValueLiteral);
       });
 
     });

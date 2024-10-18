@@ -82,10 +82,10 @@
         // expect(instance.createdAt).to.be(expectedValueLiteral);
       });
 
-      it('should have the property updateAt (base name: "update_at")', function() {
-        // TODO: update the code to test the property updateAt
-        expect(instance).to.have.property('updateAt');
-        // expect(instance.updateAt).to.be(expectedValueLiteral);
+      it('should have the property updatedAt (base name: "updated_at")', function() {
+        // TODO: update the code to test the property updatedAt
+        expect(instance).to.have.property('updatedAt');
+        // expect(instance.updatedAt).to.be(expectedValueLiteral);
       });
 
     });

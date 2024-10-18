@@ -17,6 +17,8 @@ Method | HTTP request | Description
 
 
 
+Returns all volumes for the specified mission. Note that markers of type model volume (marker_type=2) may return two records if multiple surfaces are specified. This data should match the data retrieved from the CSV download from the Volume Report.
+
 ### Example
 ```javascript
 var FirmatekMissionsApi = require('firmatek_missions_api');
@@ -70,6 +72,8 @@ Name | Type | Description  | Notes
 > [Marker] getMarkers(missionId, siteId)
 
 
+
+Returns all markers for the specified mission
 
 ### Example
 ```javascript
@@ -125,6 +129,8 @@ Name | Type | Description  | Notes
 
 
 
+Returns all missions for the specified site that are less than 90 days old.
+
 ### Example
 ```javascript
 var FirmatekMissionsApi = require('firmatek_missions_api');
@@ -176,6 +182,8 @@ Name | Type | Description  | Notes
 
 
 
+Returns the latest mission for the specified site (if there are any that are less than 90 days old).
+
 ### Example
 ```javascript
 var FirmatekMissionsApi = require('firmatek_missions_api');
@@ -226,6 +234,8 @@ Name | Type | Description  | Notes
 > [Site] getSites()
 
 
+
+Returns all Sites
 
 ### Example
 ```javascript

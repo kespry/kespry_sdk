@@ -80,8 +80,8 @@
         obj.threshold = ApiClient.convertToType(data['threshold'], 'Number');
       if (data.hasOwnProperty('offset'))
         obj.offset = ApiClient.convertToType(data['offset'], 'Number');
-      if (data.hasOwnProperty('computedDensity'))
-        obj.computedDensity = ApiClient.convertToType(data['computedDensity'], 'Number');
+      if (data.hasOwnProperty('density'))
+        obj.density = ApiClient.convertToType(data['density'], 'Number');
       if (data.hasOwnProperty('cutMass'))
         obj.cutMass = ApiClient.convertToType(data['cutMass'], 'Number');
       if (data.hasOwnProperty('fillMass'))
@@ -135,13 +135,13 @@
   exports.prototype.perimeter = undefined;
 
   /**
-   * Cut Volume
+   * Cut Volume (m3)
    * @member {Number} cutVolume
    */
   exports.prototype.cutVolume = undefined;
 
   /**
-   * Fill Volume
+   * Fill Volume (m3)
    * @member {Number} fillVolume
    */
   exports.prototype.fillVolume = undefined;
@@ -153,31 +153,31 @@
   exports.prototype.threshold = undefined;
 
   /**
-   * Offset
+   * Offset (m3)
    * @member {Number} offset
    */
   exports.prototype.offset = undefined;
 
   /**
-   * Density
-   * @member {Number} computedDensity
+   * Density (kg/m3)
+   * @member {Number} density
    */
-  exports.prototype.computedDensity = undefined;
+  exports.prototype.density = undefined;
 
   /**
-   * Cut Mass
+   * Cut Mass (kg)
    * @member {Number} cutMass
    */
   exports.prototype.cutMass = undefined;
 
   /**
-   * Fill Mass
+   * Fill Mass (kg)
    * @member {Number} fillMass
    */
   exports.prototype.fillMass = undefined;
 
   /**
-   * Uses Extracted
+   * Indicates if the volume values were calculated using the feature extracted DSM
    * @member {Boolean} usesExtracted
    */
   exports.prototype.usesExtracted = undefined;

@@ -85,31 +85,31 @@
   exports.prototype.id = undefined;
 
   /**
-   * Fly ID
+   * Internal image ID used by support
    * @member {String} uid
    */
   exports.prototype.uid = undefined;
 
   /**
-   * Date the mission was captured
+   * Date the mission was captured (UTC)
    * @member {String} capturedAt
    */
   exports.prototype.capturedAt = undefined;
 
   /**
-   * Date the mission was created
+   * Date the mission was created (UTC)
    * @member {String} createdAt
    */
   exports.prototype.createdAt = undefined;
 
   /**
-   * Date the mission was updated
+   * Date the mission was updated (UTC)
    * @member {String} updatedAt
    */
   exports.prototype.updatedAt = undefined;
 
   /**
-   * Mission status
+   * Mission status. Values are pending, pending_gps_update, waiting_for_gps_data, complete, preprocessing, waiting_for_upload, processing_error, or manual_processing
    * @member {String} status
    */
   exports.prototype.status = undefined;

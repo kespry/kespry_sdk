@@ -13,6 +13,8 @@ Method | HTTP request | Description
 
 
 
+Authenticates the supplied client ID and secret and returns an OAuth authentication token.
+
 ### Example
 ```javascript
 var ApplicationAuthorizationApi = require('application_authorization_api');
