@@ -3,7 +3,7 @@ var FirmatekMissionsApi = require('firmatek_missions_api');
 
 const { resolve } = require('path');
 
-const kespry_api_host = process.env.KESPRY_API_HOST || 'https://staging-services.kespry.com'
+const kespry_api_host = process.env.KESPRY_API_HOST || 'https://services.kespry.com'
 
 const readline = require('readline');
 
