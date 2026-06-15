@@ -217,35 +217,47 @@
             "properties": {
                 "id": {
                     "type": "integer",
-                    "description": "Site ID"
+                    "description": "Site ID",
+                    "example": 4821
                 },
                 "name": {
                     "type": "string",
-                    "description": "Site name"
+                    "description": "Site name",
+                    "example": "North Quarry"
                 },
                 "customer_id": {
                     "type": "integer",
-                    "description": "Customer ID"
+                    "description": "Customer ID",
+                    "example": 312
                 },
                 "center_lat": {
                     "type": "number",
-                    "description": "Center latitude in WGS84"
+                    "description": "Center latitude in WGS84",
+                    "example": 37.7749
                 },
                 "center_lng": {
                     "type": "number",
-                    "description": "Center longitude in WGS84"
+                    "description": "Center longitude in WGS84",
+                    "example": -122.4194
                 },
                 "outline": {
                     "type": "object",
-                    "description": "Site outline as a GeoJson format in WGS84"
+                    "description": "Site outline as a GeoJSON geometry (Polygon) in WGS84, e.g. {\"type\": \"Polygon\", \"coordinates\": [[[lng, lat], ...]]}"
                 },
                 "created_at": {
                     "type": "string",
-                    "description": "Date the site was created (UTC)"
+                    "description": "Date the site was created (UTC, format 'YYYY-MM-DD HH:MM:SS')",
+                    "example": "2024-01-15 14:30:00"
                 },
                 "updated_at": {
                     "type": "string",
-                    "description": "Date the site was update (UTC)"
+                    "description": "Date the site was updated (UTC, format 'YYYY-MM-DD HH:MM:SS')",
+                    "example": "2024-01-20 09:05:12"
+                },
+                "foreign_key": {
+                    "type": "string",
+                    "description": "Foreign key for the site (for referencing within the customer environment)",
+                    "example": "CUST-SITE-001"
                 }
             },
             "type": "object"
@@ -257,39 +269,46 @@
             "properties": {
                 "id": {
                     "type": "integer",
-                    "description": "Mission ID"
+                    "description": "Mission ID",
+                    "example": 99182
                 },
                 "uid": {
                     "type": "string",
-                    "description": "Internal image ID used by support"
+                    "description": "Internal image ID used by support",
+                    "example": "1029384"
                 },
                 "captured_at": {
                     "type": "string",
-                    "description": "Date the mission was captured (UTC)"
+                    "description": "Date the mission was captured (UTC, format 'YYYY-MM-DD HH:MM:SS')",
+                    "example": "2024-01-15 14:30:00"
                 },
                 "created_at": {
                     "type": "string",
-                    "description": "Date the mission was created (UTC)"
+                    "description": "Date the mission was created (UTC, format 'YYYY-MM-DD HH:MM:SS')",
+                    "example": "2024-01-15 16:02:41"
                 },
                 "updated_at": {
                     "type": "string",
-                    "description": "Date the mission was updated (UTC)"
+                    "description": "Date the mission was updated (UTC, format 'YYYY-MM-DD HH:MM:SS')",
+                    "example": "2024-01-16 08:14:09"
                 },
                 "status": {
                     "type": "string",
-                    "description": "Mission status. Values are pending, pending_gps_update, waiting_for_gps_data, complete, preprocessing, waiting_for_upload, processing_error, or manual_processing"
+                    "description": "Mission status. Values are pending, pending_gps_update, waiting_for_gps_data, complete, preprocessing, waiting_for_upload, processing_error, or manual_processing",
+                    "example": "complete"
                 },
                 "outline": {
                     "type": "object",
-                    "description": "Mission outline as a GeoJson format in WGS84"
+                    "description": "Mission outline as a GeoJSON geometry (Polygon) in WGS84, e.g. {\"type\": \"Polygon\", \"coordinates\": [[[lng, lat], ...]]}"
                 },
                 "mission_outline": {
                     "type": "object",
-                    "description": "Mission outline as a GeoJson format in WGS84"
+                    "description": "Flight/mission boundary as a GeoJSON geometry (Polygon) in WGS84"
                 },
                 "operator": {
                     "type": "string",
-                    "description": "Name of the flight operator"
+                    "description": "Name of the flight operator",
+                    "example": "Jane Doe"
                 }
             },
             "type": "object"
@@ -302,97 +321,124 @@
             "properties": {
                 "id": {
                     "type": "integer",
-                    "description": "Marker ID"
+                    "description": "Marker ID",
+                    "example": 550231
                 },
                 "image_id": {
                     "type": "integer",
-                    "description": "Mission ID"
+                    "description": "Mission ID",
+                    "example": 99182
                 },
                 "name": {
                     "type": "string",
-                    "description": "Marker name"
+                    "description": "Marker name",
+                    "example": "Stockpile 01"
                 },
                 "description": {
                     "type": "string",
-                    "description": "Marker description"
+                    "description": "Marker description",
+                    "example": "Crushed aggregate"
                 },
                 "marker_type": {
                     "type": "integer",
-                    "description": "Marker type,  0: point, 1: cross section, 2: model volume, 3: volume, 4: inventory volume, 5: area, 6: compliance line, 7: markup, 8: external (Firmatek Services)"
+                    "description": "Marker type,  0: point, 1: cross section, 2: model volume, 3: volume, 4: inventory volume, 5: area, 6: compliance line, 7: markup, 8: external (Firmatek Services)",
+                    "example": 3
                 },
                 "shape_type": {
                     "type": "string",
-                    "description": "Marker type: Point, LineString or Polygon"
+                    "description": "Marker geometry type: Point, LineString or Polygon",
+                    "example": "Polygon"
                 },
                 "pile_id": {
                     "type": "integer",
-                    "description": "Pile ID"
+                    "description": "Pile ID",
+                    "example": 1
                 },
                 "known_surface_id": {
                     "type": "integer",
-                    "description": "ID of the known surface if the if the volume_mode is \"known_surface\""
+                    "description": "ID of the known surface if the volume_mode is \"known_surface\"",
+                    "example": 42
                 },
                 "density": {
                     "type": "number",
-                    "description": "Density (kg/m3)"
+                    "description": "Density (kg/m3)",
+                    "example": 1500.0
                 },
                 "offset": {
                     "type": "number",
-                    "description": "Volume offset"
+                    "description": "Volume offset",
+                    "example": 0.0
                 },
                 "fixed_elevation": {
                     "type": "number",
-                    "description": "Elevation to use as the base of the pile if the volume_mode is \"fixed_elevation\" (m)"
+                    "description": "Elevation to use as the base of the pile if the volume_mode is \"fixed_elevation\" (m)",
+                    "example": 312.5
                 },
                 "geojson": {
                     "type": "object",
-                    "description": "Geometry of the marker as a GeoJson format in WGS84"
+                    "description": "Geometry of the marker as a GeoJSON geometry in WGS84, e.g. {\"type\": \"Polygon\", \"coordinates\": [[[lng, lat], ...]]}"
                 },
                 "created_at": {
                     "type": "string",
-                    "description": "Date the marker was created (UTC)"
+                    "description": "Date the marker was created (UTC, format 'YYYY-MM-DD HH:MM:SS')",
+                    "example": "2024-01-15 16:10:00"
                 },
                 "updated_at": {
                     "type": "string",
-                    "description": "Date the marker was updated (UTC)"
+                    "description": "Date the marker was updated (UTC, format 'YYYY-MM-DD HH:MM:SS')",
+                    "example": "2024-01-16 08:20:00"
                 },
                 "created_by": {
                     "type": "string",
-                    "description": "User who created the marker"
+                    "description": "User who created the marker",
+                    "example": "jane.doe@example.com"
                 },
                 "updated_by": {
                     "type": "string",
-                    "description": "User who last updated the marker"
+                    "description": "User who last updated the marker",
+                    "example": "jane.doe@example.com"
                 },
                 "locked": {
                     "type": "boolean",
-                    "description": "Is the marker locked"
+                    "description": "Is the marker locked",
+                    "example": false
                 },
                 "is_manual": {
                     "type": "boolean",
-                    "description": "Is the marker manual or assigned to an inventory product"
+                    "description": "Is the marker manual or assigned to an inventory product",
+                    "example": false
                 },
                 "use_extracted": {
                     "type": "boolean",
-                    "description": "When true, reported volumes use the feature extracted DSM data"
+                    "description": "When true, reported volumes use the feature extracted DSM data",
+                    "example": false
                 },
                 "product_id": {
                     "type": "integer",
-                    "description": "ID of the product used if is_manual is False"
+                    "description": "ID of the product used if is_manual is False",
+                    "example": 781
                 },
                 "volume_mode": {
                     "type": "string",
-                    "description": "Volume mode for the marker if it is a volume based marker. Values are base_points, fixed_elevation, known_surface or none"
+                    "description": "Volume mode for the marker if it is a volume based marker. Values are base_points, fixed_elevation, known_surface or none",
+                    "example": "base_points"
                 },
                 "base_points": {
                     "type": "object",
-                    "description": "Base points used to define the base of the pile if volume_mode is \"base_points\""
+                    "description": "Base points used to define the base of the pile if volume_mode is \"base_points\". Array of [lng, lat, elevation] coordinates in WGS84."
                 },
                 "messages": {
                     "type": "array",
                     "description": "Processing messages. If present is an array of objects of the form { \"code\": \"small_base_points_area\", \"level\": \"warn\", \"message\": \"Your base points only cover a small area. For accurate measurement add more points over a larger area if possible.\"}",
                     "items": {
                         "type": "object"
+                    }
+                },
+                "comparison_surfaces": {
+                    "type": "array",
+                    "description": "Comparison surfaces for model volume markers (marker_type=2). Null or absent for all other marker types.",
+                    "items": {
+                        "$ref": "#/definitions/ComparisonSurface"
                     }
                 }
             },
@@ -471,6 +517,56 @@
                 "usesExtracted": {
                     "type": "boolean",
                     "description": "Indicates if the volume values were calculated using the feature extracted DSM"
+                }
+            },
+            "type": "object"
+        },
+        "ComparisonSurface": {
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "Comparison surface record ID",
+                    "example": 1234
+                },
+                "comparison_surface_id": {
+                    "type": "integer",
+                    "description": "ID of the referenced surface (known surface or image)",
+                    "example": 42
+                },
+                "comparison_surface_type": {
+                    "type": "string",
+                    "description": "Surface type: BasePoints, Image, FixedElevation, or KnownSurface",
+                    "example": "KnownSurface"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Display name of the comparison surface",
+                    "example": "Base Grade"
+                },
+                "elevation": {
+                    "type": "string",
+                    "description": "Fixed elevation value when comparison_surface_type is FixedElevation",
+                    "example": "312.5"
+                },
+                "geojson": {
+                    "type": "object",
+                    "description": "Geometry of the comparison surface as a GeoJSON object in WGS84"
+                }
+            },
+            "type": "object"
+        },
+        "Error": {
+            "required": [
+                "message"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "description": "Human-readable error message",
+                    "example": "Not authorized to access this site (4821)"
                 }
             },
             "type": "object"

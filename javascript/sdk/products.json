@@ -1,0 +1,166 @@
+{
+    "swagger": "2.0",
+    "basePath": "/api/products",
+    "paths": {
+        "/v1/sites/{site_id}/products": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "description": "ID of the site",
+                    "name": "site_id",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    }
+                },
+                "description": "Returns all products for the specified site.",
+                "operationId": "get_product_list",
+                "tags": [
+                    "products"
+                ]
+            }
+        },
+        "/v1/sites/{site_id}/products/{product_id}": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "description": "ID of the product",
+                    "name": "product_id",
+                    "required": true,
+                    "type": "integer"
+                },
+                {
+                    "in": "path",
+                    "description": "ID of the site",
+                    "name": "site_id",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "404": {
+                        "description": "Product not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                },
+                "description": "Returns a single product by ID. The product must belong to the specified site.",
+                "operationId": "get_product_detail",
+                "tags": [
+                    "products"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "Firmatek Products API",
+        "version": "1.0",
+        "description": "Products API for accessing Products in the Kespry Platform",
+        "termsOfService": "https://firmatek.com/terms-of-use/"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "apikey": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
+        }
+    },
+    "security": [
+        {
+            "apikey": [
+                {
+                    "type": "apiKey",
+                    "in": "header",
+                    "name": "Authorization"
+                }
+            ]
+        }
+    ],
+    "tags": [
+        {
+            "name": "products",
+            "description": "APIs for accessing Products defined for a Site. Products carry specification values and are referenced by inventory volume markers via product_id."
+        }
+    ],
+    "definitions": {
+        "Error": {
+            "required": [
+                "message"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "description": "Human-readable error message",
+                    "example": "Not authorized to access this site (4821)"
+                }
+            },
+            "type": "object"
+        },
+        "Product": {
+            "required": [
+                "id",
+                "name",
+                "site_id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "Product ID",
+                    "example": 781
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Product name",
+                    "example": "Crushed Limestone"
+                },
+                "site_id": {
+                    "type": "integer",
+                    "description": "ID of the site this product belongs to",
+                    "example": 4821
+                },
+                "values": {
+                    "type": "object",
+                    "description": "Product specification values as a JSON array"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

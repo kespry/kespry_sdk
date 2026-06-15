@@ -1,0 +1,396 @@
+{
+    "swagger": "2.0",
+    "basePath": "/api/downloads",
+    "paths": {
+        "/v1/sites/{site_id}/missions/{mission_id}/available_downloads": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "description": "ID of the mission",
+                    "name": "mission_id",
+                    "required": true,
+                    "type": "integer"
+                },
+                {
+                    "in": "path",
+                    "description": "ID of the site",
+                    "name": "site_id",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "502": {
+                        "description": "Download service unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "400": {
+                        "description": "Mission does not belong to the site, or is older than the availability window",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/AvailableDownload"
+                            }
+                        }
+                    }
+                },
+                "description": "Returns the downloads available for the specified mission, each with its configurable options.",
+                "operationId": "get_available_downloads",
+                "tags": [
+                    "downloads"
+                ]
+            }
+        },
+        "/v1/sites/{site_id}/missions/{mission_id}/jobs": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "description": "ID of the mission",
+                    "name": "mission_id",
+                    "required": true,
+                    "type": "integer"
+                },
+                {
+                    "in": "path",
+                    "description": "ID of the site",
+                    "name": "site_id",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "post": {
+                "responses": {
+                    "502": {
+                        "description": "Download service unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request payload",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/DownloadJob"
+                        }
+                    }
+                },
+                "description": "Requests (creates) a new download job for the specified mission. download_type must match the 'name' of an available download.",
+                "operationId": "post_download_jobs_list",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/CreateDownloadRequest"
+                        }
+                    }
+                ],
+                "tags": [
+                    "downloads"
+                ]
+            },
+            "get": {
+                "responses": {
+                    "502": {
+                        "description": "Download service unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "400": {
+                        "description": "Mission does not belong to the site, or is older than the availability window",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DownloadJob"
+                            }
+                        }
+                    }
+                },
+                "description": "Lists the download jobs for the specified mission, refreshing their status from the download service.",
+                "operationId": "get_download_jobs_list",
+                "tags": [
+                    "downloads"
+                ]
+            }
+        },
+        "/v1/sites/{site_id}/missions/{mission_id}/jobs/{download_job_id}": {
+            "parameters": [
+                {
+                    "in": "path",
+                    "description": "ID of the download job",
+                    "name": "download_job_id",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "in": "path",
+                    "description": "ID of the mission",
+                    "name": "mission_id",
+                    "required": true,
+                    "type": "integer"
+                },
+                {
+                    "in": "path",
+                    "description": "ID of the site",
+                    "name": "site_id",
+                    "required": true,
+                    "type": "integer"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "502": {
+                        "description": "Download service unavailable",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Download job not found for this mission",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "400": {
+                        "description": "Mission does not belong to the site, or is older than the availability window",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/DownloadJob"
+                        }
+                    }
+                },
+                "description": "Returns the status of a single download job, polling the download service if the job is not yet in a terminal state.",
+                "operationId": "get_download_job_status",
+                "tags": [
+                    "downloads"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "Firmatek Downloads API",
+        "version": "1.0",
+        "description": "Downloads API for accessing mission Downloads in the Kespry Platform",
+        "termsOfService": "https://firmatek.com/terms-of-use/"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "apikey": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "Authorization"
+        }
+    },
+    "security": [
+        {
+            "apikey": [
+                {
+                    "type": "apiKey",
+                    "in": "header",
+                    "name": "Authorization"
+                }
+            ]
+        }
+    ],
+    "tags": [
+        {
+            "name": "downloads",
+            "description": "APIs for discovering, requesting, and retrieving downloadable analytic products (orthomosaics, DSMs, contours, point clouds, etc.) for a mission. Download files are prepared asynchronously; request a job, poll its status, then fetch the file via the returned presigned URL."
+        }
+    ],
+    "definitions": {
+        "AvailableDownload": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "filename": {
+                    "type": "string",
+                    "description": "Base output filename",
+                    "example": "Orthomosaic"
+                },
+                "label": {
+                    "type": "string",
+                    "description": "Human-readable label",
+                    "example": "Orthomosaic"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Download type identifier; supply this as download_type when creating a job",
+                    "example": "ORTHO"
+                },
+                "note": {
+                    "type": "string",
+                    "description": "Advisory note about this download, if any"
+                },
+                "params": {
+                    "type": "array",
+                    "description": "Available options for this download",
+                    "items": {
+                        "$ref": "#/definitions/DownloadParam"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "CreateDownloadRequest": {
+            "required": [
+                "download_type"
+            ],
+            "properties": {
+                "download_type": {
+                    "type": "string",
+                    "description": "Must match the 'name' of an available download for this mission",
+                    "example": "ORTHO"
+                },
+                "download_options": {
+                    "type": "object",
+                    "description": "Option values keyed by param name, e.g. {\"file_type\": \"png\"}"
+                }
+            },
+            "type": "object"
+        },
+        "Error": {
+            "required": [
+                "message"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "description": "Human-readable error message",
+                    "example": "Not authorized to access this site (4821)"
+                }
+            },
+            "type": "object"
+        },
+        "DownloadJob": {
+            "required": [
+                "job_id"
+            ],
+            "properties": {
+                "job_id": {
+                    "type": "string",
+                    "description": "Download job ID; use it to poll status",
+                    "example": "a8937cd4-4070-4b8e-8235-7dbd98886e3c"
+                },
+                "created_at": {
+                    "type": "string",
+                    "description": "Job creation time (UTC, ISO-8601, e.g. 2026-06-10T17:01:30Z)",
+                    "example": "2026-06-10T17:01:30Z"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Job status: NEW, PENDING, QUEUED, STARTED, RUNNING, SCHEDULED, SUCCESS, FAILED, or STOPPED",
+                    "example": "SUCCESS"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Download type",
+                    "example": "ORTHO"
+                },
+                "options": {
+                    "type": "object",
+                    "description": "Options the job was created with"
+                },
+                "presigned_url": {
+                    "type": "string",
+                    "description": "Time-limited (15-minute) S3 URL to download the output file; null until the job succeeds"
+                },
+                "file_status": {
+                    "type": "string",
+                    "description": "'exists' when the output file is present, 'missing' if it is gone/expired, 'unknown' before the job produces output",
+                    "example": "exists"
+                }
+            },
+            "type": "object"
+        },
+        "DownloadParam": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "label": {
+                    "type": "string",
+                    "description": "Human-readable label",
+                    "example": "File Type"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Option key to supply in download_options",
+                    "example": "file_type"
+                },
+                "param_type": {
+                    "type": "string",
+                    "description": "One of: select, range, bool",
+                    "example": "select"
+                },
+                "required": {
+                    "type": "boolean",
+                    "description": "Whether the option must be supplied",
+                    "example": true
+                },
+                "values": {
+                    "type": "object",
+                    "description": "Allowed values for a select, [min, max] for a range, or [true, false] for a bool"
+                }
+            },
+            "type": "object"
+        }
+    }
+}
