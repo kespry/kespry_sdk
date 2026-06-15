@@ -31,8 +31,8 @@ Command:
    (5) List Volumes for a Mission
    (6) List Products for a Site
    (7) List Known Surfaces for a Site
-   (8) List Available Downloads for a Mission
-   (9) Download a File for a Mission
+   (8) Request a new Download for a Mission
+   (9) Download an Existing Download for a Mission
    (0) Exit
 Enter command (0-9): `;
   return new Promise((resolve) => rl.question(p, resolve));
@@ -147,6 +147,47 @@ function getDownloadJobsAsync(downloadsAPI, siteId, missionId) {
     );
   });
 }
+function createDownloadJobAsync(downloadsAPI, siteId, missionId, body) {
+  return new Promise((resolve, reject) => {
+    downloadsAPI.apiClient.callApi(
+      '/v1/sites/{site_id}/missions/{mission_id}/jobs', 'POST',
+      { 'site_id': parseInt(siteId), 'mission_id': parseInt(missionId) }, {}, {}, {}, {}, body,
+      ['apikey'], ['application/json'], ['application/json'],
+      Object, (error, data) => {
+        if (error) reject(error);
+        else resolve(data);
+      }
+    );
+  });
+}
+function getDownloadJobStatusAsync(downloadsAPI, siteId, missionId, jobId) {
+  return new Promise((resolve, reject) => {
+    downloadsAPI.apiClient.callApi(
+      '/v1/sites/{site_id}/missions/{mission_id}/jobs/{download_job_id}', 'GET',
+      { 'site_id': parseInt(siteId), 'mission_id': parseInt(missionId), 'download_job_id': jobId },
+      {}, {}, {}, {}, null,
+      ['apikey'], ['application/json'], ['application/json'],
+      Object, (error, data) => {
+        if (error) reject(error);
+        else resolve(data);
+      }
+    );
+  });
+}
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Coerce a raw prompt string into the type implied by the download param.
+function coerceParamValue(param, raw) {
+  if (param.param_type === 'bool') {
+    return ['true', '1', 'yes', 'y'].includes(raw.trim().toLowerCase());
+  }
+  if (param.param_type === 'range') {
+    const n = Number(raw);
+    return Number.isNaN(n) ? raw : n;
+  }
+  return raw;
+}
+
 function filenameFromUrl(fileUrl, fallback) {
   try {
     const base = path.basename(new URL(fileUrl).pathname);
@@ -323,11 +364,107 @@ async function performOperation(operation, missionsAPI, productsAPI, knownSurfac
             const siteId = await prompt('Enter a Site ID: ');
             const missionId = await prompt('Enter a Mission ID: ');
             const downloads = await getAvailableDownloadsAsync(downloadsAPI, siteId, missionId);
-            if (Array.isArray(downloads)) {
-                console.table(downloads.map(d => ({
+            if (!Array.isArray(downloads) || downloads.length === 0) {
+                console.log('No downloads are available for this mission.');
+                break;
+            }
+
+            // 1-based index: console.table keys the index column off the object keys.
+            const rows = {};
+            downloads.forEach((d, i) => {
+                rows[i + 1] = {
                     name: trunc(d.name), label: trunc(d.label), filename: trunc(d.filename),
                     note: trunc(d.note), params: Array.isArray(d.params) ? d.params.length : 0
-                })));
+                };
+            });
+            console.table(rows);
+
+            console.log(`Available indices: ${downloads.map((d, i) => i + 1).join(', ')} (0 = don't request anything)`);
+            const choice = await prompt('Enter the index of the download to request: ');
+            const selectedIndex = parseInt(choice);
+            if (selectedIndex === 0 || Number.isNaN(selectedIndex)) {
+                break;
+            }
+            if (selectedIndex < 1 || selectedIndex > downloads.length) {
+                console.log(`Index ${choice} is not a valid option.`);
+                break;
+            }
+            const available = downloads[selectedIndex - 1];
+
+            // Prompt for each parameter. Required params must be supplied; optional
+            // params left blank are omitted from download_options.
+            const downloadOptions = {};
+            for (const param of (available.params || [])) {
+                const req = param.required ? 'required' : 'optional';
+                const allowed = param.values !== undefined ? `, allowed: ${JSON.stringify(param.values)}` : '';
+                let value;
+                while (true) {
+                    const raw = await prompt(`  ${param.label || param.name} [${param.name}] (${param.param_type}, ${req}${allowed}): `);
+                    if (raw.trim() === '') {
+                        if (param.required) {
+                            console.log('  This parameter is required.');
+                            continue;
+                        }
+                        value = undefined;
+                    } else {
+                        value = coerceParamValue(param, raw);
+                    }
+                    break;
+                }
+                if (value !== undefined) {
+                    downloadOptions[param.name] = value;
+                }
+            }
+
+            const body = { download_type: available.name };
+            if (Object.keys(downloadOptions).length > 0) {
+                body.download_options = downloadOptions;
+            }
+
+            console.log(`Requesting download "${available.name}" ...`);
+            const job = await createDownloadJobAsync(downloadsAPI, siteId, missionId, body);
+            if (!job || !job.job_id) {
+                console.log('No job ID returned from the download request.');
+                break;
+            }
+            console.log(`Created job ${job.job_id}; waiting for it to complete...`);
+
+            const POLL_INTERVAL_MS = 5000;
+            const MAX_ATTEMPTS = 60; // ~5 minutes
+            let status = job.status;
+            let latest = job;
+            for (let attempt = 0; attempt < MAX_ATTEMPTS && status !== 'SUCCESS'; attempt++) {
+                if (status === 'FAILED' || status === 'STOPPED') break;
+                await sleep(POLL_INTERVAL_MS);
+                latest = await getDownloadJobStatusAsync(downloadsAPI, siteId, missionId, job.job_id);
+                status = latest.status;
+                console.log(`  status: ${status}`);
+            }
+
+            if (status !== 'SUCCESS') {
+                console.log(`Download did not complete (last status: ${status}).`);
+                break;
+            }
+            // The presigned URL can lag the SUCCESS status by a moment; give it
+            // one more poll to populate before giving up.
+            if (!latest.presigned_url) {
+                console.log('  succeeded but no download URL yet; polling once more...');
+                await sleep(POLL_INTERVAL_MS);
+                latest = await getDownloadJobStatusAsync(downloadsAPI, siteId, missionId, job.job_id);
+                console.log(`  status: ${latest.status}`);
+            }
+            if (!latest.presigned_url) {
+                console.log('Job succeeded but no download URL was provided.');
+                break;
+            }
+
+            const destPath = filenameFromUrl(latest.presigned_url, available.filename || available.name || `download_${job.job_id}`);
+            console.log(`Downloading to ${destPath} ...`);
+            try {
+                await downloadFile(latest.presigned_url, destPath);
+                console.log(`Saved ${destPath}`);
+            } catch (err) {
+                console.error('Download failed:', err.message);
             }
             break;
         }
