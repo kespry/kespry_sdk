@@ -222,7 +222,6 @@ function downloadFile(fileUrl, destPath) {
 const trunc = (s, len = 30) => (s && s.length > len) ? s.substring(0, len) + '…' : s;
 
 async function performOperation(operation, missionsAPI, productsAPI, knownSurfacesAPI, downloadsAPI) {
-    console.log(`In performOperation with ${operation}`)
     switch (operation.toLowerCase()) {
         case '1': {
             const sites = await getSitesAsync(missionsAPI);
@@ -556,7 +555,6 @@ async function processCommands(data) {
   let continueLoop = true;
   while (continueLoop) {
       const operation = await promptCommand();
-      console.log(`Operation: ${operation}`);
       try {
         continueLoop = await performOperation(operation, missionsAPI, productsAPI, knownSurfacesAPI, downloadsAPI);
       } catch (error) {
