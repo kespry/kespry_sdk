@@ -1,7 +1,7 @@
 {
   "name": "application_authorization_api",
   "version": "1.0",
-  "description": "API_for_authenticating_client_credentials_to_be_able_to_access_the_Kespry_Platform_APIs",
+  "description": "API_for_authenticating_client_credentials_to_be_able_to_access_the_Kespry_Platform_APIs__Exchange_your_API_keysecret__HTTP_Basic_for_a_Bearer_token_here_then_use_that_token_with_the_Platform_API__apiv1_",
   "license": "Unlicense",
   "main": "src/index.js",
   "scripts": {

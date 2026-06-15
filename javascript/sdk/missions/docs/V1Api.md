@@ -1,14 +1,14 @@
 # FirmatekMissionsApi.V1Api
 
-All URIs are relative to *https://localhost/api/missions*
+All URIs are relative to *https://localhost/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getMarkerVolumes**](V1Api.md#getMarkerVolumes) | **GET** /v1/sites/{site_id}/missions/{mission_id}/volumes | 
-[**getMarkers**](V1Api.md#getMarkers) | **GET** /v1/sites/{site_id}/missions/{mission_id}/markers | 
-[**getMissions**](V1Api.md#getMissions) | **GET** /v1/sites/{site_id}/missions | 
-[**getMissionsLatestForSite**](V1Api.md#getMissionsLatestForSite) | **GET** /v1/sites/{site_id}/missions/latest | 
-[**getSites**](V1Api.md#getSites) | **GET** /v1/sites | 
+[**getMarkerVolumes**](V1Api.md#getMarkerVolumes) | **GET** /missions/v1/sites/{site_id}/missions/{mission_id}/volumes | 
+[**getMarkers**](V1Api.md#getMarkers) | **GET** /missions/v1/sites/{site_id}/missions/{mission_id}/markers | 
+[**getMissions**](V1Api.md#getMissions) | **GET** /missions/v1/sites/{site_id}/missions | 
+[**getMissionsLatestForSite**](V1Api.md#getMissionsLatestForSite) | **GET** /missions/v1/sites/{site_id}/missions/latest | 
+[**getSites**](V1Api.md#getSites) | **GET** /missions/v1/sites | 
 
 
 <a name="getMarkerVolumes"></a>

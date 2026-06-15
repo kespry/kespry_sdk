@@ -11,10 +11,7 @@
     "license": "ISC",
     "dependencies": {
         "application_authorization_api": "file:../sdk/auth",
-        "firmatek_missions_api": "file:../sdk/missions",
-        "firmatek_products_api": "file:../sdk/products",
-        "firmatek_known_surfaces_api": "file:../sdk/known-surfaces",
-        "firmatek_downloads_api": "file:../sdk/downloads"
+        "firmatek_missions_api": "file:../sdk/missions"
     },
     "devDependencies": {
         "cross-env": "^7.0.3",

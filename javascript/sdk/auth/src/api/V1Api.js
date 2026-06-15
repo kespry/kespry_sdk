@@ -1,6 +1,6 @@
 /*
  * Application Authorization API
- * API for authenticating client credentials to be able to access the Kespry Platform APIs
+ * API for authenticating client credentials to be able to access the Kespry Platform APIs. Exchange your API key/secret (HTTP Basic) for a Bearer token here, then use that token with the Platform API (/api/v1).
  *
  * OpenAPI spec version: 1.0
  *

@@ -1,8 +1,5 @@
 var ApplicationAuthorizationApi = require('application_authorization_api');
 var FirmatekMissionsApi = require('firmatek_missions_api');
-var FirmatekProductsApi = require('firmatek_products_api');
-var FirmatekKnownSurfacesApi = require('firmatek_known_surfaces_api');
-var FirmatekDownloadsApi = require('firmatek_downloads_api');
 
 const kespry_api_host = process.env.KESPRY_API_HOST || 'https://services.kespry.com'
 
@@ -74,7 +71,7 @@ function getLatestMissionAsync(missionsAPI, siteId) {
 function getMarkersAsync(missionsAPI, siteId, missionId) {
   return new Promise((resolve, reject) => {
     missionsAPI.apiClient.callApi(
-      '/v1/sites/{site_id}/missions/{mission_id}/markers', 'GET',
+      '/missions/v1/sites/{site_id}/missions/{mission_id}/markers', 'GET',
       { 'site_id': parseInt(siteId), 'mission_id': parseInt(missionId) }, {}, {}, {}, {}, null,
       ['apikey'], ['application/json'], ['application/json'],
       [Object], (error, data) => {
@@ -98,7 +95,7 @@ function getVolumesAsync(missionsAPI, siteId, missionId) {
 function getProductsAsync(productsAPI, siteId) {
   return new Promise((resolve, reject) => {
     productsAPI.apiClient.callApi(
-      '/v1/sites/{site_id}/products', 'GET',
+      '/products/v1/sites/{site_id}/products', 'GET',
       { 'site_id': parseInt(siteId) }, {}, {}, {}, {}, null,
       ['apikey'], ['application/json'], ['application/json'],
       [Object], (error, data) => {
@@ -111,7 +108,7 @@ function getProductsAsync(productsAPI, siteId) {
 function getKnownSurfacesAsync(knownSurfacesAPI, siteId) {
   return new Promise((resolve, reject) => {
     knownSurfacesAPI.apiClient.callApi(
-      '/v1/sites/{site_id}/known-surfaces', 'GET',
+      '/known-surfaces/v1/sites/{site_id}/known-surfaces', 'GET',
       { 'site_id': parseInt(siteId) }, {}, {}, {}, {}, null,
       ['apikey'], ['application/json'], ['application/json'],
       [Object], (error, data) => {
@@ -124,7 +121,7 @@ function getKnownSurfacesAsync(knownSurfacesAPI, siteId) {
 function getAvailableDownloadsAsync(downloadsAPI, siteId, missionId) {
   return new Promise((resolve, reject) => {
     downloadsAPI.apiClient.callApi(
-      '/v1/sites/{site_id}/missions/{mission_id}/available_downloads', 'GET',
+      '/downloads/v1/sites/{site_id}/missions/{mission_id}/available_downloads', 'GET',
       { 'site_id': parseInt(siteId), 'mission_id': parseInt(missionId) }, {}, {}, {}, {}, null,
       ['apikey'], ['application/json'], ['application/json'],
       [Object], (error, data) => {
@@ -137,7 +134,7 @@ function getAvailableDownloadsAsync(downloadsAPI, siteId, missionId) {
 function getDownloadJobsAsync(downloadsAPI, siteId, missionId) {
   return new Promise((resolve, reject) => {
     downloadsAPI.apiClient.callApi(
-      '/v1/sites/{site_id}/missions/{mission_id}/jobs', 'GET',
+      '/downloads/v1/sites/{site_id}/missions/{mission_id}/jobs', 'GET',
       { 'site_id': parseInt(siteId), 'mission_id': parseInt(missionId) }, {}, {}, {}, {}, null,
       ['apikey'], ['application/json'], ['application/json'],
       [Object], (error, data) => {
@@ -150,7 +147,7 @@ function getDownloadJobsAsync(downloadsAPI, siteId, missionId) {
 function createDownloadJobAsync(downloadsAPI, siteId, missionId, body) {
   return new Promise((resolve, reject) => {
     downloadsAPI.apiClient.callApi(
-      '/v1/sites/{site_id}/missions/{mission_id}/jobs', 'POST',
+      '/downloads/v1/sites/{site_id}/missions/{mission_id}/jobs', 'POST',
       { 'site_id': parseInt(siteId), 'mission_id': parseInt(missionId) }, {}, {}, {}, {}, body,
       ['apikey'], ['application/json'], ['application/json'],
       Object, (error, data) => {
@@ -163,7 +160,7 @@ function createDownloadJobAsync(downloadsAPI, siteId, missionId, body) {
 function getDownloadJobStatusAsync(downloadsAPI, siteId, missionId, jobId) {
   return new Promise((resolve, reject) => {
     downloadsAPI.apiClient.callApi(
-      '/v1/sites/{site_id}/missions/{mission_id}/jobs/{download_job_id}', 'GET',
+      '/downloads/v1/sites/{site_id}/missions/{mission_id}/jobs/{download_job_id}', 'GET',
       { 'site_id': parseInt(siteId), 'mission_id': parseInt(missionId), 'download_job_id': jobId },
       {}, {}, {}, {}, null,
       ['apikey'], ['application/json'], ['application/json'],
@@ -529,29 +526,18 @@ async function performOperation(operation, missionsAPI, productsAPI, knownSurfac
 }
   
 async function processCommands(data) {
-  // We have a bearer token, now instantiate a Missions API client.
-  var missionsClient = FirmatekMissionsApi.ApiClient.instance;
-  missionsClient.basePath = `${kespry_api_host}/api/missions`
-
-  var productsClient = FirmatekProductsApi.ApiClient.instance;
-  productsClient.basePath = `${kespry_api_host}/api/products`
-
-  var knownSurfacesClient = FirmatekKnownSurfacesApi.ApiClient.instance;
-  knownSurfacesClient.basePath = `${kespry_api_host}/api/known-surfaces`
-
-  var downloadsClient = FirmatekDownloadsApi.ApiClient.instance;
-  downloadsClient.basePath = `${kespry_api_host}/api/downloads`
-
-  const bearer = `Bearer ${data.accessToken}`;
-  missionsClient.authentications['apikey'].apiKey = bearer;
-  productsClient.authentications['apikey'].apiKey = bearer;
-  knownSurfacesClient.authentications['apikey'].apiKey = bearer;
-  downloadsClient.authentications['apikey'].apiKey = bearer;
+  // The SDK is generated from the unified platform swagger, so there is a single
+  // ApiClient (a shared singleton) whose basePath is the platform root /api. The
+  // generated operation paths already carry their family prefix (e.g. /missions/...,
+  // /products/..., /downloads/...), so all four Api classes use this one client.
+  var platformClient = FirmatekMissionsApi.ApiClient.instance;
+  platformClient.basePath = `${kespry_api_host}/api`
+  platformClient.authentications['apikey'].apiKey = `Bearer ${data.accessToken}`;
 
   var missionsAPI = new FirmatekMissionsApi.V1Api()
-  var productsAPI = new FirmatekProductsApi.ProductsApi()
-  var knownSurfacesAPI = new FirmatekKnownSurfacesApi.KnownSurfacesApi()
-  var downloadsAPI = new FirmatekDownloadsApi.DownloadsApi()
+  var productsAPI = new FirmatekMissionsApi.ProductsApi()
+  var knownSurfacesAPI = new FirmatekMissionsApi.KnownSurfacesApi()
+  var downloadsAPI = new FirmatekMissionsApi.DownloadsApi()
   let continueLoop = true;
   while (continueLoop) {
       const operation = await promptCommand();

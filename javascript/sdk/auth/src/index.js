@@ -1,6 +1,6 @@
 /*
  * Application Authorization API
- * API for authenticating client credentials to be able to access the Kespry Platform APIs
+ * API for authenticating client credentials to be able to access the Kespry Platform APIs. Exchange your API key/secret (HTTP Basic) for a Bearer token here, then use that token with the Platform API (/api/v1).
  *
  * OpenAPI spec version: 1.0
  *
@@ -25,7 +25,7 @@
   'use strict';
 
   /**
-   * API_for_authenticating_client_credentials_to_be_able_to_access_the_Kespry_Platform_APIs.<br>
+   * API_for_authenticating_client_credentials_to_be_able_to_access_the_Kespry_Platform_APIs__Exchange_your_API_keysecret__HTTP_Basic_for_a_Bearer_token_here_then_use_that_token_with_the_Platform_API__apiv1_.<br>
    * The <code>index</code> module provides access to constructors for all the classes which comprise the public API.
    * <p>
    * An AMD (recommended!) or CommonJS application will generally do something equivalent to the following:

@@ -1,7 +1,7 @@
 {
   "name": "firmatek_missions_api",
   "version": "1.0",
-  "description": "Missions_API_for_accessing_Missions_in_the_Kespry_Platform",
+  "description": "Public_API_for_accessing_Sites_Missions_Markers_Volumes_Products_Known_Surfaces_and_Downloads_in_the_Kespry_Platform__Requests_require_a_Bearer_token_obtained_from_the_Authentication_API__POST_apiauth_see_apiauthv1_",
   "license": "Unlicense",
   "main": "src/index.js",
   "scripts": {
