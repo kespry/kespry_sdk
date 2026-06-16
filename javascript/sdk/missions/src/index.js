@@ -1,6 +1,6 @@
 /*
  * Firmatek Missions API
- * Missions API for accessing Missions in the Kespry Platform
+ * Public API for accessing Sites, Missions, Markers, Volumes, Products, Known Surfaces, and Downloads in the Kespry Platform. Requests require a Bearer token obtained from the Authentication API (POST /api/auth/, see /api/auth/v1).
  *
  * OpenAPI spec version: 1.0
  *
@@ -16,16 +16,16 @@
 (function(factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/Marker', 'model/MarkerVolume', 'model/Mission', 'model/Site', 'api/V1Api'], factory);
+    define(['ApiClient', 'model/AvailableDownload', 'model/ComparisonSurface', 'model/CreateDownloadRequest', 'model/DownloadJob', 'model/DownloadParam', 'model/Error', 'model/KnownSurface', 'model/Marker', 'model/MarkerVolume', 'model/Mission', 'model/Product', 'model/Site', 'api/DownloadsApi', 'api/KnownSurfacesApi', 'api/ProductsApi', 'api/V1Api'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./model/Marker'), require('./model/MarkerVolume'), require('./model/Mission'), require('./model/Site'), require('./api/V1Api'));
+    module.exports = factory(require('./ApiClient'), require('./model/AvailableDownload'), require('./model/ComparisonSurface'), require('./model/CreateDownloadRequest'), require('./model/DownloadJob'), require('./model/DownloadParam'), require('./model/Error'), require('./model/KnownSurface'), require('./model/Marker'), require('./model/MarkerVolume'), require('./model/Mission'), require('./model/Product'), require('./model/Site'), require('./api/DownloadsApi'), require('./api/KnownSurfacesApi'), require('./api/ProductsApi'), require('./api/V1Api'));
   }
-}(function(ApiClient, Marker, MarkerVolume, Mission, Site, V1Api) {
+}(function(ApiClient, AvailableDownload, ComparisonSurface, CreateDownloadRequest, DownloadJob, DownloadParam, Error, KnownSurface, Marker, MarkerVolume, Mission, Product, Site, DownloadsApi, KnownSurfacesApi, ProductsApi, V1Api) {
   'use strict';
 
   /**
-   * Missions_API_for_accessing_Missions_in_the_Kespry_Platform.<br>
+   * Public_API_for_accessing_Sites_Missions_Markers_Volumes_Products_Known_Surfaces_and_Downloads_in_the_Kespry_Platform__Requests_require_a_Bearer_token_obtained_from_the_Authentication_API__POST_apiauth_see_apiauthv1_.<br>
    * The <code>index</code> module provides access to constructors for all the classes which comprise the public API.
    * <p>
    * An AMD (recommended!) or CommonJS application will generally do something equivalent to the following:
@@ -62,6 +62,41 @@
      */
     ApiClient: ApiClient,
     /**
+     * The AvailableDownload model constructor.
+     * @property {module:model/AvailableDownload}
+     */
+    AvailableDownload: AvailableDownload,
+    /**
+     * The ComparisonSurface model constructor.
+     * @property {module:model/ComparisonSurface}
+     */
+    ComparisonSurface: ComparisonSurface,
+    /**
+     * The CreateDownloadRequest model constructor.
+     * @property {module:model/CreateDownloadRequest}
+     */
+    CreateDownloadRequest: CreateDownloadRequest,
+    /**
+     * The DownloadJob model constructor.
+     * @property {module:model/DownloadJob}
+     */
+    DownloadJob: DownloadJob,
+    /**
+     * The DownloadParam model constructor.
+     * @property {module:model/DownloadParam}
+     */
+    DownloadParam: DownloadParam,
+    /**
+     * The Error model constructor.
+     * @property {module:model/Error}
+     */
+    Error: Error,
+    /**
+     * The KnownSurface model constructor.
+     * @property {module:model/KnownSurface}
+     */
+    KnownSurface: KnownSurface,
+    /**
      * The Marker model constructor.
      * @property {module:model/Marker}
      */
@@ -77,10 +112,30 @@
      */
     Mission: Mission,
     /**
+     * The Product model constructor.
+     * @property {module:model/Product}
+     */
+    Product: Product,
+    /**
      * The Site model constructor.
      * @property {module:model/Site}
      */
     Site: Site,
+    /**
+     * The DownloadsApi service constructor.
+     * @property {module:api/DownloadsApi}
+     */
+    DownloadsApi: DownloadsApi,
+    /**
+     * The KnownSurfacesApi service constructor.
+     * @property {module:api/KnownSurfacesApi}
+     */
+    KnownSurfacesApi: KnownSurfacesApi,
+    /**
+     * The ProductsApi service constructor.
+     * @property {module:api/ProductsApi}
+     */
+    ProductsApi: ProductsApi,
     /**
      * The V1Api service constructor.
      * @property {module:api/V1Api}

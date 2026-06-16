@@ -10,7 +10,7 @@ try {
     
     console.log(`Installing missions SDK from ${sdkMissionsPath}`);
     execSync('npm install', { cwd:sdkMissionsPath, stdio: 'inherit' });
-
+    
 } catch (error) {
     console.error('Error during postinstall:', error.message);
     process.exit(1);

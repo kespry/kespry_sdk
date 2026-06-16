@@ -1,6 +1,6 @@
 /*
  * Firmatek Missions API
- * Missions API for accessing Missions in the Kespry Platform
+ * Public API for accessing Sites, Missions, Markers, Volumes, Products, Known Surfaces, and Downloads in the Kespry Platform. Requests require a Bearer token obtained from the Authentication API (POST /api/auth/, see /api/auth/v1).
  *
  * OpenAPI spec version: 1.0
  *
@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/Marker', 'model/MarkerVolume', 'model/Mission', 'model/Site'], factory);
+    define(['ApiClient', 'model/Error', 'model/Marker', 'model/MarkerVolume', 'model/Mission', 'model/Site'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/Marker'), require('../model/MarkerVolume'), require('../model/Mission'), require('../model/Site'));
+    module.exports = factory(require('../ApiClient'), require('../model/Error'), require('../model/Marker'), require('../model/MarkerVolume'), require('../model/Mission'), require('../model/Site'));
   } else {
     // Browser globals (root is window)
     if (!root.FirmatekMissionsApi) {
       root.FirmatekMissionsApi = {};
     }
-    root.FirmatekMissionsApi.V1Api = factory(root.FirmatekMissionsApi.ApiClient, root.FirmatekMissionsApi.Marker, root.FirmatekMissionsApi.MarkerVolume, root.FirmatekMissionsApi.Mission, root.FirmatekMissionsApi.Site);
+    root.FirmatekMissionsApi.V1Api = factory(root.FirmatekMissionsApi.ApiClient, root.FirmatekMissionsApi.Error, root.FirmatekMissionsApi.Marker, root.FirmatekMissionsApi.MarkerVolume, root.FirmatekMissionsApi.Mission, root.FirmatekMissionsApi.Site);
   }
-}(this, function(ApiClient, Marker, MarkerVolume, Mission, Site) {
+}(this, function(ApiClient, Error, Marker, MarkerVolume, Mission, Site) {
   'use strict';
 
   /**
@@ -95,7 +95,7 @@
       var returnType = [MarkerVolume];
 
       return this.apiClient.callApi(
-        '/v1/sites/{site_id}/missions/{mission_id}/volumes', 'GET',
+        '/missions/v1/sites/{site_id}/missions/{mission_id}/volumes', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -149,7 +149,7 @@
       var returnType = [Marker];
 
       return this.apiClient.callApi(
-        '/v1/sites/{site_id}/missions/{mission_id}/markers', 'GET',
+        '/missions/v1/sites/{site_id}/missions/{mission_id}/markers', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -196,7 +196,7 @@
       var returnType = [Mission];
 
       return this.apiClient.callApi(
-        '/v1/sites/{site_id}/missions', 'GET',
+        '/missions/v1/sites/{site_id}/missions', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -243,7 +243,7 @@
       var returnType = Mission;
 
       return this.apiClient.callApi(
-        '/v1/sites/{site_id}/missions/latest', 'GET',
+        '/missions/v1/sites/{site_id}/missions/latest', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -283,7 +283,7 @@
       var returnType = [Site];
 
       return this.apiClient.callApi(
-        '/v1/sites', 'GET',
+        '/missions/v1/sites', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );

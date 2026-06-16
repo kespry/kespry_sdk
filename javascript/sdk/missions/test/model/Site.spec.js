@@ -1,6 +1,6 @@
 /*
  * Firmatek Missions API
- * Missions API for accessing Missions in the Kespry Platform
+ * Public API for accessing Sites, Missions, Markers, Volumes, Products, Known Surfaces, and Downloads in the Kespry Platform. Requests require a Bearer token obtained from the Authentication API (POST /api/auth/, see /api/auth/v1).
  *
  * OpenAPI spec version: 1.0
  *
@@ -86,6 +86,12 @@
         // TODO: update the code to test the property updatedAt
         expect(instance).to.have.property('updatedAt');
         // expect(instance.updatedAt).to.be(expectedValueLiteral);
+      });
+
+      it('should have the property foreignKey (base name: "foreign_key")', function() {
+        // TODO: update the code to test the property foreignKey
+        expect(instance).to.have.property('foreignKey');
+        // expect(instance.foreignKey).to.be(expectedValueLiteral);
       });
 
     });

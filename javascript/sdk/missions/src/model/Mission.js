@@ -1,6 +1,6 @@
 /*
  * Firmatek Missions API
- * Missions API for accessing Missions in the Kespry Platform
+ * Public API for accessing Sites, Missions, Markers, Volumes, Products, Known Surfaces, and Downloads in the Kespry Platform. Requests require a Bearer token obtained from the Authentication API (POST /api/auth/, see /api/auth/v1).
  *
  * OpenAPI spec version: 1.0
  *
@@ -91,19 +91,19 @@
   exports.prototype.uid = undefined;
 
   /**
-   * Date the mission was captured (UTC)
+   * Date the mission was captured (UTC, format 'YYYY-MM-DD HH:MM:SS')
    * @member {String} capturedAt
    */
   exports.prototype.capturedAt = undefined;
 
   /**
-   * Date the mission was created (UTC)
+   * Date the mission was created (UTC, format 'YYYY-MM-DD HH:MM:SS')
    * @member {String} createdAt
    */
   exports.prototype.createdAt = undefined;
 
   /**
-   * Date the mission was updated (UTC)
+   * Date the mission was updated (UTC, format 'YYYY-MM-DD HH:MM:SS')
    * @member {String} updatedAt
    */
   exports.prototype.updatedAt = undefined;
@@ -115,13 +115,13 @@
   exports.prototype.status = undefined;
 
   /**
-   * Mission outline as a GeoJson format in WGS84
+   * Mission outline as a GeoJSON geometry (Polygon) in WGS84, e.g. {\"type\": \"Polygon\", \"coordinates\": [[[lng, lat], ...]]}
    * @member {Object} outline
    */
   exports.prototype.outline = undefined;
 
   /**
-   * Mission outline as a GeoJson format in WGS84
+   * Flight/mission boundary as a GeoJSON geometry (Polygon) in WGS84
    * @member {Object} missionOutline
    */
   exports.prototype.missionOutline = undefined;

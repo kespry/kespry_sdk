@@ -1,6 +1,6 @@
 /*
  * Firmatek Missions API
- * Missions API for accessing Missions in the Kespry Platform
+ * Public API for accessing Sites, Missions, Markers, Volumes, Products, Known Surfaces, and Downloads in the Kespry Platform. Requests require a Bearer token obtained from the Authentication API (POST /api/auth/, see /api/auth/v1).
  *
  * OpenAPI spec version: 1.0
  *
@@ -113,37 +113,37 @@
               let data = dataCtr[p];
               expect(data).to.be.a(FirmatekMissionsApi.Marker);
               expect(data.id).to.be.a('number');
-              expect(data.id).to.be(0);
+              expect(data.id).to.be(550231);
               expect(data.imageId).to.be.a('number');
-              expect(data.imageId).to.be(0);
+              expect(data.imageId).to.be(99182);
               expect(data.name).to.be.a('string');
-              expect(data.name).to.be("");
+              expect(data.name).to.be("Stockpile 01");
               expect(data.description).to.be.a('string');
-              expect(data.description).to.be("");
+              expect(data.description).to.be("Crushed aggregate");
               expect(data.markerType).to.be.a('number');
-              expect(data.markerType).to.be(0);
+              expect(data.markerType).to.be(3);
               expect(data.shapeType).to.be.a('string');
-              expect(data.shapeType).to.be("");
+              expect(data.shapeType).to.be("Polygon");
               expect(data.pileId).to.be.a('number');
-              expect(data.pileId).to.be(0);
+              expect(data.pileId).to.be(1);
               expect(data.knownSurfaceId).to.be.a('number');
-              expect(data.knownSurfaceId).to.be(0);
+              expect(data.knownSurfaceId).to.be(42);
               expect(data.density).to.be.a('number');
-              expect(data.density).to.be();
+              expect(data.density).to.be(1500.0);
               expect(data.offset).to.be.a('number');
-              expect(data.offset).to.be();
+              expect(data.offset).to.be(0.0);
               expect(data.fixedElevation).to.be.a('number');
-              expect(data.fixedElevation).to.be();
+              expect(data.fixedElevation).to.be(312.5);
               expect(data.geojson).to.be.a(Object);
               expect(data.geojson).to.be();
               expect(data.createdAt).to.be.a('string');
-              expect(data.createdAt).to.be("");
+              expect(data.createdAt).to.be("2024-01-15 16:10:00");
               expect(data.updatedAt).to.be.a('string');
-              expect(data.updatedAt).to.be("");
+              expect(data.updatedAt).to.be("2024-01-16 08:20:00");
               expect(data.createdBy).to.be.a('string');
-              expect(data.createdBy).to.be("");
+              expect(data.createdBy).to.be("jane.doe@example.com");
               expect(data.updatedBy).to.be.a('string');
-              expect(data.updatedBy).to.be("");
+              expect(data.updatedBy).to.be("jane.doe@example.com");
               expect(data.locked).to.be.a('boolean');
               expect(data.locked).to.be(false);
               expect(data.isManual).to.be.a('boolean');
@@ -151,9 +151,9 @@
               expect(data.useExtracted).to.be.a('boolean');
               expect(data.useExtracted).to.be(false);
               expect(data.productId).to.be.a('number');
-              expect(data.productId).to.be(0);
+              expect(data.productId).to.be(781);
               expect(data.volumeMode).to.be.a('string');
-              expect(data.volumeMode).to.be("");
+              expect(data.volumeMode).to.be("base_points");
               expect(data.basePoints).to.be.a(Object);
               expect(data.basePoints).to.be();
               {
@@ -165,6 +165,28 @@
                   expect(data).to.be.a(Object);
                   expect(data).to.be();
                 }
+              }
+              {
+                let dataCtr = data.comparisonSurfaces;
+                expect(dataCtr).to.be.an(Array);
+                expect(dataCtr).to.not.be.empty();
+                for (let p in dataCtr) {
+                  let data = dataCtr[p];
+                  expect(data).to.be.a(FirmatekMissionsApi.ComparisonSurface);
+                  expect(data.id).to.be.a('number');
+                  expect(data.id).to.be(1234);
+                  expect(data.comparisonSurfaceId).to.be.a('number');
+                  expect(data.comparisonSurfaceId).to.be(42);
+                  expect(data.comparisonSurfaceType).to.be.a('string');
+                  expect(data.comparisonSurfaceType).to.be("KnownSurface");
+                  expect(data.name).to.be.a('string');
+                  expect(data.name).to.be("Base Grade");
+                  expect(data.elevation).to.be.a('string');
+                  expect(data.elevation).to.be("312.5");
+                  expect(data.geojson).to.be.a(Object);
+                  expect(data.geojson).to.be();
+  
+                        }
               }
             }
 
@@ -194,23 +216,23 @@
               let data = dataCtr[p];
               expect(data).to.be.a(FirmatekMissionsApi.Mission);
               expect(data.id).to.be.a('number');
-              expect(data.id).to.be(0);
+              expect(data.id).to.be(99182);
               expect(data.uid).to.be.a('string');
-              expect(data.uid).to.be("");
+              expect(data.uid).to.be("1029384");
               expect(data.capturedAt).to.be.a('string');
-              expect(data.capturedAt).to.be("");
+              expect(data.capturedAt).to.be("2024-01-15 14:30:00");
               expect(data.createdAt).to.be.a('string');
-              expect(data.createdAt).to.be("");
+              expect(data.createdAt).to.be("2024-01-15 16:02:41");
               expect(data.updatedAt).to.be.a('string');
-              expect(data.updatedAt).to.be("");
+              expect(data.updatedAt).to.be("2024-01-16 08:14:09");
               expect(data.status).to.be.a('string');
-              expect(data.status).to.be("");
+              expect(data.status).to.be("complete");
               expect(data.outline).to.be.a(Object);
               expect(data.outline).to.be();
               expect(data.missionOutline).to.be.a(Object);
               expect(data.missionOutline).to.be();
               expect(data.operator).to.be.a('string');
-              expect(data.operator).to.be("");
+              expect(data.operator).to.be("Jane Doe");
             }
 
             done();
@@ -234,23 +256,23 @@
             // TODO: update response assertions
             expect(data).to.be.a(FirmatekMissionsApi.Mission);
             expect(data.id).to.be.a('number');
-            expect(data.id).to.be(0);
+            expect(data.id).to.be(99182);
             expect(data.uid).to.be.a('string');
-            expect(data.uid).to.be("");
+            expect(data.uid).to.be("1029384");
             expect(data.capturedAt).to.be.a('string');
-            expect(data.capturedAt).to.be("");
+            expect(data.capturedAt).to.be("2024-01-15 14:30:00");
             expect(data.createdAt).to.be.a('string');
-            expect(data.createdAt).to.be("");
+            expect(data.createdAt).to.be("2024-01-15 16:02:41");
             expect(data.updatedAt).to.be.a('string');
-            expect(data.updatedAt).to.be("");
+            expect(data.updatedAt).to.be("2024-01-16 08:14:09");
             expect(data.status).to.be.a('string');
-            expect(data.status).to.be("");
+            expect(data.status).to.be("complete");
             expect(data.outline).to.be.a(Object);
             expect(data.outline).to.be();
             expect(data.missionOutline).to.be.a(Object);
             expect(data.missionOutline).to.be();
             expect(data.operator).to.be.a('string');
-            expect(data.operator).to.be("");
+            expect(data.operator).to.be("Jane Doe");
 
             done();
           });
@@ -277,21 +299,23 @@
               let data = dataCtr[p];
               expect(data).to.be.a(FirmatekMissionsApi.Site);
               expect(data.id).to.be.a('number');
-              expect(data.id).to.be(0);
+              expect(data.id).to.be(4821);
               expect(data.name).to.be.a('string');
-              expect(data.name).to.be("");
+              expect(data.name).to.be("North Quarry");
               expect(data.customerId).to.be.a('number');
-              expect(data.customerId).to.be(0);
+              expect(data.customerId).to.be(312);
               expect(data.centerLat).to.be.a('number');
-              expect(data.centerLat).to.be();
+              expect(data.centerLat).to.be(37.7749);
               expect(data.centerLng).to.be.a('number');
-              expect(data.centerLng).to.be();
+              expect(data.centerLng).to.be(-122.4194);
               expect(data.outline).to.be.a(Object);
               expect(data.outline).to.be();
               expect(data.createdAt).to.be.a('string');
-              expect(data.createdAt).to.be("");
+              expect(data.createdAt).to.be("2024-01-15 14:30:00");
               expect(data.updatedAt).to.be.a('string');
-              expect(data.updatedAt).to.be("");
+              expect(data.updatedAt).to.be("2024-01-20 09:05:12");
+              expect(data.foreignKey).to.be.a('string');
+              expect(data.foreignKey).to.be("CUST-SITE-001");
             }
 
             done();

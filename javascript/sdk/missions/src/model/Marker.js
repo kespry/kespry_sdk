@@ -1,6 +1,6 @@
 /*
  * Firmatek Missions API
- * Missions API for accessing Missions in the Kespry Platform
+ * Public API for accessing Sites, Missions, Markers, Volumes, Products, Known Surfaces, and Downloads in the Kespry Platform. Requests require a Bearer token obtained from the Authentication API (POST /api/auth/, see /api/auth/v1).
  *
  * OpenAPI spec version: 1.0
  *
@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient'], factory);
+    define(['ApiClient', 'model/ComparisonSurface'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../ApiClient'), require('./ComparisonSurface'));
   } else {
     // Browser globals (root is window)
     if (!root.FirmatekMissionsApi) {
       root.FirmatekMissionsApi = {};
     }
-    root.FirmatekMissionsApi.Marker = factory(root.FirmatekMissionsApi.ApiClient);
+    root.FirmatekMissionsApi.Marker = factory(root.FirmatekMissionsApi.ApiClient, root.FirmatekMissionsApi.ComparisonSurface);
   }
-}(this, function(ApiClient) {
+}(this, function(ApiClient, ComparisonSurface) {
   'use strict';
 
   /**
@@ -104,6 +104,8 @@
         obj.basePoints = ApiClient.convertToType(data['base_points'], Object);
       if (data.hasOwnProperty('messages'))
         obj.messages = ApiClient.convertToType(data['messages'], [Object]);
+      if (data.hasOwnProperty('comparison_surfaces'))
+        obj.comparisonSurfaces = ApiClient.convertToType(data['comparison_surfaces'], [ComparisonSurface]);
     }
     return obj;
   }
@@ -139,7 +141,7 @@
   exports.prototype.markerType = undefined;
 
   /**
-   * Marker type: Point, LineString or Polygon
+   * Marker geometry type: Point, LineString or Polygon
    * @member {String} shapeType
    */
   exports.prototype.shapeType = undefined;
@@ -151,7 +153,7 @@
   exports.prototype.pileId = undefined;
 
   /**
-   * ID of the known surface if the if the volume_mode is \"known_surface\"
+   * ID of the known surface if the volume_mode is \"known_surface\"
    * @member {Number} knownSurfaceId
    */
   exports.prototype.knownSurfaceId = undefined;
@@ -175,19 +177,19 @@
   exports.prototype.fixedElevation = undefined;
 
   /**
-   * Geometry of the marker as a GeoJson format in WGS84
+   * Geometry of the marker as a GeoJSON geometry in WGS84, e.g. {\"type\": \"Polygon\", \"coordinates\": [[[lng, lat], ...]]}
    * @member {Object} geojson
    */
   exports.prototype.geojson = undefined;
 
   /**
-   * Date the marker was created (UTC)
+   * Date the marker was created (UTC, format 'YYYY-MM-DD HH:MM:SS')
    * @member {String} createdAt
    */
   exports.prototype.createdAt = undefined;
 
   /**
-   * Date the marker was updated (UTC)
+   * Date the marker was updated (UTC, format 'YYYY-MM-DD HH:MM:SS')
    * @member {String} updatedAt
    */
   exports.prototype.updatedAt = undefined;
@@ -235,7 +237,7 @@
   exports.prototype.volumeMode = undefined;
 
   /**
-   * Base points used to define the base of the pile if volume_mode is \"base_points\"
+   * Base points used to define the base of the pile if volume_mode is \"base_points\". Array of [lng, lat, elevation] coordinates in WGS84.
    * @member {Object} basePoints
    */
   exports.prototype.basePoints = undefined;
@@ -245,6 +247,12 @@
    * @member {Array.<Object>} messages
    */
   exports.prototype.messages = undefined;
+
+  /**
+   * Comparison surfaces for model volume markers (marker_type=2). Null or absent for all other marker types.
+   * @member {Array.<module:model/ComparisonSurface>} comparisonSurfaces
+   */
+  exports.prototype.comparisonSurfaces = undefined;
 
 
   return exports;

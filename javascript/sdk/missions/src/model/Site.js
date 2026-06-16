@@ -1,6 +1,6 @@
 /*
  * Firmatek Missions API
- * Missions API for accessing Missions in the Kespry Platform
+ * Public API for accessing Sites, Missions, Markers, Volumes, Products, Known Surfaces, and Downloads in the Kespry Platform. Requests require a Bearer token obtained from the Authentication API (POST /api/auth/, see /api/auth/v1).
  *
  * OpenAPI spec version: 1.0
  *
@@ -76,6 +76,8 @@
         obj.createdAt = ApiClient.convertToType(data['created_at'], 'String');
       if (data.hasOwnProperty('updated_at'))
         obj.updatedAt = ApiClient.convertToType(data['updated_at'], 'String');
+      if (data.hasOwnProperty('foreign_key'))
+        obj.foreignKey = ApiClient.convertToType(data['foreign_key'], 'String');
     }
     return obj;
   }
@@ -111,22 +113,28 @@
   exports.prototype.centerLng = undefined;
 
   /**
-   * Site outline as a GeoJson format in WGS84
+   * Site outline as a GeoJSON geometry (Polygon) in WGS84, e.g. {\"type\": \"Polygon\", \"coordinates\": [[[lng, lat], ...]]}
    * @member {Object} outline
    */
   exports.prototype.outline = undefined;
 
   /**
-   * Date the site was created (UTC)
+   * Date the site was created (UTC, format 'YYYY-MM-DD HH:MM:SS')
    * @member {String} createdAt
    */
   exports.prototype.createdAt = undefined;
 
   /**
-   * Date the site was update (UTC)
+   * Date the site was updated (UTC, format 'YYYY-MM-DD HH:MM:SS')
    * @member {String} updatedAt
    */
   exports.prototype.updatedAt = undefined;
+
+  /**
+   * Foreign key for the site (for referencing within the customer environment)
+   * @member {String} foreignKey
+   */
+  exports.prototype.foreignKey = undefined;
 
 
   return exports;
